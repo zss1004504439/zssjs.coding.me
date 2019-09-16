@@ -1,0 +1,26 @@
+{
+  "config": {
+    "branch": "master",
+    "domain": "http://zssjs.coding.me",
+    "email": "1004504439@qq.com",
+    "platform": "coding",
+    "repository": "zssjs.coding.me",
+    "token": "3710c99de664d2649e64dde71578211b501665f7",
+    "username": "zssjs"
+  },
+  "comment": {
+    "commentPlatform": "gitalk",
+    "disqusSetting": {
+      "api": "",
+      "apikey": "",
+      "shortname": ""
+    },
+    "gitalkSetting": {
+      "clientId": "",
+      "clientSecret": "",
+      "owner": "",
+      "repository": ""
+    },
+    "showComment": false
+  }
+}
