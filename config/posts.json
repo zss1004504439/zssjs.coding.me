@@ -1,6 +1,136 @@
 {
   "posts": [
     {
+      "content": "[Halo，Babel](https://juejin.im/post/5d7fcfade51d45620821cf7f)",
+      "data": {
+        "title": "Halo，Babel",
+        "date": "2019-09-17 17:51:31",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "halobabel"
+    },
+    {
+      "content": "[迅读PDF](http://www.xundupdf.com/)\n> 可免删除保留电子签名",
+      "data": {
+        "title": "迅读PDF",
+        "date": "2019-09-17 16:58:02",
+        "tags": [
+          "PDF 工具"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "httpwwwxundupdfcom"
+    },
+    {
+      "content": "[走进安卓的重灾区----video]([走进安卓的重灾区----video](https://juejin.im/post/5d8046345188253849631aa6))\n>在ios上会自动全屏播放，需要在video标签上设置一个属性 webkit-playsinline，ios10及以上版本属性名改成 playsinline。安卓上，无法自动播放，必须手动触发视频的播放。调用任何方法都没用，据说这个为了帮用户省流量而设定的。但是安卓在首次触发之后，再次触发可以通过调用 .play 来触发播放视频。因此做兼容的时候可以设一个判断是否首次播放的标志来处理。 ",
+      "data": {
+        "title": "走进安卓的重灾区----video",
+        "date": "2019-09-17 12:01:42",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "zou-jin-an-zhuo-de-chong-zai-qu-video"
+    },
+    {
+      "content": "[rotateImage](https://github.com/any86/useful-utils/blob/master/docs/rotateImage.md)",
+      "data": {
+        "title": "rotateImage 旋转图片",
+        "date": "2019-09-17 11:46:08",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "rotateimage"
+    },
+    {
+      "content": "[CountDown](https://github.com/any86/useful-utils/blob/master/docs/CountDown.md)",
+      "data": {
+        "title": "⏳CountDown",
+        "date": "2019-09-17 11:43:16",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "countdown"
+    },
+    {
+      "content": "[灵活运用JS开发技巧](https://juejin.im/post/5cc7afdde51d456e671c7e48)",
+      "data": {
+        "title": "灵活运用JS开发技巧",
+        "date": "2019-09-17 11:40:00",
+        "tags": [
+          "JS",
+          "ECMAScript"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "ling-huo-yun-yong-js-kai-fa-ji-qiao"
+    },
+    {
+      "content": "[JavaScript入门指南(学习笔记)](https://juejin.im/post/5d7b884b6fb9a06aff5ea033)",
+      "data": {
+        "title": "JavaScript入门指南(学习笔记)",
+        "date": "2019-09-17 10:49:22",
+        "tags": [
+          "ECMAScript"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "javascript-ru-men-zhi-nan-xue-xi-bi-ji"
+    },
+    {
+      "content": "[如何获取某一天所在的星期](https://segmentfault.com/a/1190000020342937)\n```js\nfunction getWeekStartAndEnd(timestamp) {\n    const oneDayTime = 1000 * 60 * 60 * 24; // 一天里一共的毫秒数\n    const today = timestamp ? new Date(timestamp) : new Date();\n    const todayDay = today.getDay() || 7; // 若那一天是周末时，则强制赋值为7\n    const startDate = new Date(\n        today.getTime() - oneDayTime * (todayDay - 1)\n    );\n    const endDate = new Date(today.getTime() + oneDayTime * (7 - todayDay));\n\n    return { startDate, endDate };\n}\n```",
+      "data": {
+        "title": "JavaScript：如何获取某一天所在的星期",
+        "date": "2019-09-17 08:28:34",
+        "tags": [
+          "ECMAScript",
+          "Date"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "javascriptru-he-huo-qu-mou-yi-tian-suo-zai-de-xing-qi"
+    },
+    {
       "content": ">前端server域名为：`http://xx_domain`\n>后端server域名为：`https://github.com`\n\n`http://xx_domain` 对 `https://github.com` 发起请求一定会出现跨域\n\n不过只需要启动一个nginx服务器，将server_name设置为`xx_domain`,然后设置相应的location以拦截前端需要跨域的请求，最后将请求代理回`github.com`。如下面的配置：\n```\n## 配置反向代理的参数\nserver {\n    listen    8080;\n    server_name xx_domain\n\n    ## 1. 用户访问 http://xx_domain，则反向代理到 https://github.com\n    location / {\n        proxy_pass  https://github.com;\n        proxy_redirect     off;\n        proxy_set_header   Host             $host;        # 传递域名\n        proxy_set_header   X-Real-IP        $remote_addr; # 传递ip\n        proxy_set_header   X-Scheme         $scheme;      # 传递协议\n        proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;\n    }\n}\n```\n这样可以完美绕过浏览器的同源策略：github.com访问nginx的github.com属于同源访问，而nginx对服务端转发的请求不会触发浏览器的同源策略。\n```\nhttp {\n    include mime.types;\n    server_tokens off;\n\n    ## 配置反向代理的参数\n    server {\n        listen    8080;\n\n        ## 1. 用户访问 http://ip:port，则反向代理到 https://github.com\n        location / {\n            proxy_pass  https://github.com;\n            proxy_redirect     off;\n            proxy_set_header   Host             $host;\n            proxy_set_header   X-Real-IP        $remote_addr;\n            proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;\n        }\n\n        ## 2.用户访问 http://ip:port/README.md，则反向代理到\n        ##   https://github.com/zibinli/blog/blob/master/README.md\n        location /README.md {\n            proxy_set_header  X-Real-IP  $remote_addr;\n            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n            proxy_pass https://github.com/zibinli/blog/blob/master/README.md;\n        }\n    }\n}\n```",
       "data": {
         "title": "Nginx 解决跨域的原理",
@@ -409,7 +539,7 @@
       "fileName": "css3-19-chong-loadingjia-zai-dong-xiao"
     },
     {
-      "content": "[https://juejin.im/post/5d4d0ec651882549594e7293](https://juejin.im/post/5d4d0ec651882549594e7293)",
+      "content": "[灵活运用CSS开发技巧(66个实用技巧，值得收藏)](https://juejin.im/post/5d4d0ec651882549594e7293)",
       "data": {
         "title": "灵活运用CSS开发技巧(66个实用技巧，值得收藏)",
         "date": "2019-09-09 11:56:37",
@@ -593,6 +723,30 @@
   "tags": [
     {
       "index": -1,
+      "name": "PDF 工具",
+      "slug": "CScbFckNI",
+      "used": true
+    },
+    {
+      "index": -1,
+      "name": "JS",
+      "slug": "wvPOp3y83",
+      "used": true
+    },
+    {
+      "index": -1,
+      "name": "ECMAScript",
+      "slug": "RSJWg9SqX",
+      "used": true
+    },
+    {
+      "index": -1,
+      "name": "Date",
+      "slug": "1GtGwpl4I",
+      "used": true
+    },
+    {
+      "index": -1,
       "name": "微信开发",
       "slug": "vsnOnS8fl",
       "used": true
@@ -673,12 +827,6 @@
       "name": "Gridea",
       "slug": "ozqpYaIiU",
       "used": true
-    },
-    {
-      "index": -1,
-      "name": "JS",
-      "slug": "wvPOp3y83",
-      "used": false
     },
     {
       "index": -1,
