@@ -1,6 +1,103 @@
 {
   "posts": [
     {
+      "content": "[关于带有\"显示更多\"按钮的多行文本截断思考😲](https://juejin.im/post/5d818e39e51d4561e0516ba4)",
+      "data": {
+        "title": "关于带有\"显示更多\"按钮的多行文本截断思考😲",
+        "date": "2019-09-19 09:11:48",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "guan-yu-dai-you-xian-shi-geng-duo-an-niu-de-duo-xing-wen-ben-jie-duan-si-kao"
+    },
+    {
+      "content": "[[创造狮导航](http://chuangzaoshi.com/)](http://chuangzaoshi.com/)",
+      "data": {
+        "title": "🎁🔗网址导航",
+        "date": "2019-09-19 08:55:50",
+        "tags": [
+          "导航"
+        ],
+        "published": true,
+        "hideInList": true,
+        "feature": null
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "dao-hang"
+    },
+    {
+      "content": "## [政采云前端小报](https://weekly.zoo.team/)",
+      "data": {
+        "title": "✔🎰前端周报",
+        "date": "2019-09-19 08:35:21",
+        "tags": [],
+        "published": true,
+        "hideInList": true,
+        "feature": null
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "weekly"
+    },
+    {
+      "content": "## [政采云](https://www.zoo.team/)\n> [基于 Vue 的商品主图放大镜方案](https://www.zoo.team/article/vue-item-magnifier)\n\n## [刘泓宾博客](https://www.lhbbk.com/)\n> [iphonex点击表单后，网页焦点错位](https://www.lhbbk.com/archives/250/)\n\n## [PASSER-BY](https://passer-by.com/)\n> [JQuery 项目/插件](https://passer-by.com/project.html)",
+      "data": {
+        "title": "🐱‍🏍大神博客",
+        "date": "2019-09-19 08:20:36",
+        "tags": [],
+        "published": true,
+        "hideInList": true,
+        "feature": null
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "da-shen-bo-ke"
+    },
+    {
+      "content": "[纯css实现星级评分效果](https://juejin.im/post/5d7f200ae51d456201486ed7)",
+      "data": {
+        "title": "💛纯css实现星级评分效果",
+        "date": "2019-09-18 17:42:15",
+        "tags": [
+          "CSS3",
+          "css 特效"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "chun-css-shi-xian-xing-ji-ping-fen-xiao-guo"
+    },
+    {
+      "content": "[vue / react的UI库都在用的几个DOM API🚀](https://juejin.im/post/5d808601f265da03ef7a469b)\n## element.getBoundingClientRect():rect\n## insertAdjacentElement\n### 实现append(beforeend), 插入到指定元素内部的尾部\n### 实现prepend(afterbegin), 插入到指定元素内部的头部\n### 实现after(afterend), 插入到指定元素后面\n### 实现before(beforebegin), 插入到指定元素前面",
+      "data": {
+        "title": "vue / react的UI库都在用的几个DOM API🚀",
+        "date": "2019-09-18 16:50:48",
+        "tags": [
+          "DOM"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "vue-react-de-ui-ku-du-zai-yong-de-ji-ge-dom-api"
+    },
+    {
       "content": "[Halo，Babel](https://juejin.im/post/5d7fcfade51d45620821cf7f)",
       "data": {
         "title": "Halo，Babel",
@@ -63,9 +160,9 @@
       "fileName": "rotateimage"
     },
     {
-      "content": "[CountDown](https://github.com/any86/useful-utils/blob/master/docs/CountDown.md)",
+      "content": "[CountDown](https://github.com/any86/useful-utils/blob/master/docs/CountDown.md)\n## 倒计时小例子\n```\n<div id=\"box\"></div>\n\t<script>\n\t\t//new Date()获取客户端本地当前时间（不能拿它做重要依据，因为用户可以随意修改）\n\t\t/* \n\t\t * 倒计时抢购需要从服务器获取当前时间  AJAX\n\t\t *    问题：时间差（从服务器把时间给客户端，到客户端获取到这个信息，中间经历的时间就是时间差，而时间差是不可避免的，我们应尽可能减少这个误差）\n\t\t *    - 从响应头获取时间（AJAX异步）\n\t\t *    - 基于HEAD请求（只获取响应头信息）\n\t\t */\n\t\tlet target = new Date('2019/09/14 13:27:00'),\n\t\t\tnow = null,\n\t\t\ttimer = null;\n\n\t\t//=>从服务器获取时间：获取到时间后再做其他的事情\n\t\tfunction func(callback) {\n\t\t\tlet xhr = new XMLHttpRequest;\n\t\t\txhr.open('HEAD', 'json/data.json', true);\n\t\t\txhr.onreadystatechange = function () {\n\t\t\t\tif (!/^(2|3)\\d{2}$/.test(xhr.status)) return;\n\t\t\t\tif (xhr.readyState === 2) {\n\t\t\t\t\tnow = new Date(xhr.getResponseHeader('Date'));\n\t\t\t\t\tcallback && callback();\n\t\t\t\t}\n\t\t\t}\n\t\t\txhr.send(null);\n\t\t}\n\n\t\t//=>开启倒计时模式\n\t\tfunction computed() {\n\t\t\tlet spanTime = target - now;\n\t\t\tif (spanTime <= 0) {\n\t\t\t\t//=>到抢购时间：结束定时器\n\t\t\t\tclearInterval(timer);\n\t\t\t\ttimer = null;\n\t\t\t\tbox.innerHTML = \"开抢~~\";\n\t\t\t\treturn;\n\t\t\t}\n\t\t\tlet hours = Math.floor(spanTime / (60 * 60 * 1000));\n\t\t\tspanTime -= hours * 60 * 60 * 1000;\n\t\t\tlet minutes = Math.floor(spanTime / (60 * 1000));\n\t\t\tspanTime -= minutes * 60 * 1000;\n\t\t\tlet seconds = Math.floor(spanTime / 1000);\n\t\t\tbox.innerHTML =\n\t\t\t\t`距离抢购还剩 ${hours<10?'0'+hours:hours}:${minutes<10?'0'+minutes:minutes}:${seconds<10?'0'+seconds:seconds}`;\n\n\t\t\t//=>每一次计算完，我们需要让NOW在原来的基础上加上一秒（第一次从服务器获取到时间，后期直接基于这个时间自己加即可，不要每隔一秒重新从服务器拿）\n\t\t\tnow = new Date(now.getTime() + 1000);\n\t\t}\n\t\tfunc(() => {\n\t\t\t//=>已经从服务器获取时间了\n\t\t\tcomputed();\n\t\t\ttimer = setInterval(computed, 1000);\n\t\t});\n\t</script>\n```",
       "data": {
-        "title": "⏳CountDown",
+        "title": "⏳CountDown 倒计时",
         "date": "2019-09-17 11:43:16",
         "tags": [],
         "published": true,
@@ -723,6 +820,18 @@
   "tags": [
     {
       "index": -1,
+      "name": "导航",
+      "slug": "fd-GbsrMB",
+      "used": true
+    },
+    {
+      "index": -1,
+      "name": "DOM",
+      "slug": "r7GGl0O6k",
+      "used": true
+    },
+    {
+      "index": -1,
       "name": "PDF 工具",
       "slug": "CScbFckNI",
       "used": true
@@ -854,14 +963,26 @@
     },
     {
       "index": -1,
-      "name": "DOM",
-      "slug": "r7GGl0O6k",
+      "name": "Nginx",
+      "slug": "nwUVZWX57",
       "used": false
     },
     {
       "index": -1,
-      "name": "Nginx",
-      "slug": "nwUVZWX57",
+      "name": "网友博客",
+      "slug": "jVf-TWagy",
+      "used": false
+    },
+    {
+      "index": -1,
+      "name": "前端周报",
+      "slug": "C1xdYr9fB",
+      "used": false
+    },
+    {
+      "index": -1,
+      "name": "JQuery",
+      "slug": "6DMfVYLHC",
       "used": false
     }
   ],
@@ -889,6 +1010,16 @@
     {
       "link": "/tag/ay0H2xLOg/",
       "name": "Vue",
+      "openType": "Internal"
+    },
+    {
+      "link": "/post/weekly/",
+      "name": "前端周报",
+      "openType": "Internal"
+    },
+    {
+      "link": "/post/da-shen-bo-ke/",
+      "name": "大神博客",
       "openType": "Internal"
     }
   ]
