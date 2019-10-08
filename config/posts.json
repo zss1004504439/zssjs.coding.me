@@ -1,6 +1,76 @@
 {
   "posts": [
     {
+      "content": "[用小程序·云开发轻松构建二手书商城小程序丨实战](https://juejin.im/post/5d900f42f265da5b9603c19d)",
+      "data": {
+        "title": "用小程序·云开发轻松构建二手书商城小程序丨实战",
+        "date": "2019-09-29 10:28:48",
+        "tags": [
+          "微信开发"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "yong-xiao-cheng-xu-yun-kai-fa-qing-song-gou-jian-er-shou-shu-shang-cheng-xiao-cheng-xu-gun-shi-zhan"
+    },
+    {
+      "content": "## 局部组件引用方式\r\n```js\r\nimport A from '@/component/A'\r\nexport default {\r\n    data () {},\r\n    components: { A }\r\n}\r\n```\r\n## 全局组件引用方式1\r\n```js\r\n// index.js 文件\r\nimport A from '@/component/A'\r\nA.install = function (Vue) {\r\n  Vue.component(A.name, A)\r\n}\r\nexport {\r\n    A\r\n}\r\n// main.js 文件\r\nimport { A } from './components/index'\r\nVue.use(A)\r\n\r\n```\r\n## 全局组件引用方式2(推荐?)\r\n```js\r\n// index.js 文件\r\nimport A from '@/component/global/A'\r\nA.install = function (Vue) {\r\n  Vue.component(A.name, A)\r\n}\r\nfunction InstallAll(Vue) {\r\n    Vue.use(A)\r\n}\r\nexport {\r\n    A,\r\n    InstallAll\r\n}\r\n// main.js 文件\r\nimport { InstallAll } from './components/index'\r\nInstallAll(Vue)\r\n```\r\n## 全局组件引用方式3(webpack?)\r\n[【官方】基础组件的自动化全局注册](https://cn.vuejs.org/v2/guide/components-registration.html#%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8C%96%E5%85%A8%E5%B1%80%E6%B3%A8%E5%86%8C)\r\n[官方例子](https://github.com/chrisvfritz/vue-enterprise-boilerplate/blob/master/src/components/_globals.js)\r\n> require.context('.', false, /\\.vue$/)加载当前目录所有.vue结尾的文件自动遍历注册，再引入到main.JS",
+      "data": {
+        "title": "Vue 自定义组件全局引用",
+        "date": "2019-09-29 10:03:40",
+        "tags": [
+          "Vue cli 配置"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "vue-zi-ding-yi-zu-jian-quan-ju-yin-yong"
+    },
+    {
+      "content": "## 引入 babel-polyfill\r\n```\r\nnpm install --save babel-polyfill\r\n```\r\n```js\r\n// vue.config.js\r\nmodule.exports = {\r\n    configureWebpack: config => {\r\n        return {\r\n            entry: {\r\n                app:['babel-polyfill', './src/main.js']\r\n            }\r\n        }\r\n    }\r\n} \r\n```",
+      "data": {
+        "title": "axios 兼容 promise 浏览器",
+        "date": "2019-09-29 10:00:27",
+        "tags": [
+          "axios",
+          "Vue cli 配置"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "axios-jian-rong-promise-liu-lan-qi"
+    },
+    {
+      "content": "[前端的微信支付（JSAPI支付）](https://juejin.im/post/5d8db510e51d4577ff0d9ea4)",
+      "data": {
+        "title": "前端的微信支付（JSAPI支付）",
+        "date": "2019-09-28 15:24:40",
+        "tags": [
+          "微信开发",
+          "支付"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "qian-duan-de-wei-xin-zhi-fu-jsapi-zhi-fu"
+    },
+    {
       "content": "## 使用display：table（作为flexbox的替代）使子元素在其父元素中水平垂直居。\r\n```html\r\n<div class=\"container\">\r\n  <div class=\"center\"><span>Centered content</span></div>\r\n</div>\r\n```\r\n```css\r\n.container {\r\n  border: 1px solid #333;\r\n  height: 250px;\r\n  width: 250px;\r\n}\r\n.center {\r\n  display: table;\r\n  height: 100%;\r\n  width: 100%;\r\n}\r\n.center > span {\r\n  display: table-cell;\r\n  text-align: center;\r\n  vertical-align: middle;\r\n}\r\n```\r\n### [例子](https://codepen.io/bigerfe-com/pen/JjPYqYg)\r\n\r\n> display：table 使.center元素的行为类似于 HTML元素。\r\n> 设置.center的宽高为100%，使其填满父元素。\r\n> display：table-cell, 设置'.center > span'的table-cell允许元素表现得像HTML元素。\r\n> text-align: center 使子元素水平居中。\r\n> vertical-align: middle 使子元素垂直居中。\r\n### 外部父级必须有固定的宽高。 ",
       "data": {
         "title": "元素水平垂直居 -- 使用表格居中",
@@ -1122,6 +1192,16 @@
     }
   ],
   "tags": [
+    {
+      "name": "Vue cli 配置",
+      "slug": "AhYf3DgI2",
+      "used": true
+    },
+    {
+      "name": "支付",
+      "slug": "KFXnGxyCd",
+      "used": true
+    },
     {
       "name": "axios",
       "slug": "eCWGfR6xK",
