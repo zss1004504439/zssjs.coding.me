@@ -1,6 +1,51 @@
 {
   "posts": [
     {
+      "content": "## JS正则表达式获取指定字符之后指定字符之前的字符串\r\n```js\r\nvar bgImg = \"url(\\\"https://img30.360buyimg.com/sku/jfs/t26203/262/100869187/204098/1d1479e9/5b84b80bNf39db45f.jpg\\\")\";\r\n```\r\n### 方法1\r\n```js\r\nvar backgroundImageRegex=/(?<=url\\(\").+(?=\"\\))/;\r\nvar matchResult=bgImg.match(backgroundImageRegex);\r\nif(matchResult.length>0){\r\n  alert(matchResult[0]);\r\n}\r\n```\r\n### 方法2\r\n```js\r\nvar backgroundImageRegex=/\\((.*)\\)/;\r\nvar matchResult=bgImg.match(backgroundImageRegex);\r\n```\r\nhttps://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions",
+      "data": {
+        "title": "js 正则获取指定字符之后指定字符之前",
+        "date": "2019-12-18 13:38:01",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "js-zheng-ze-huo-qu-zhi-ding-zi-fu-zhi-hou-zhi-ding-zi-fu-zhi-qian"
+    },
+    {
+      "content": "### 三个函数的作用都是将函数绑定到上下文中，用来改变函数中this的指向；三者的不同点在于语法的不同。\r\n```js\r\nfun.call(thisArg[, arg1[, arg2[, ...]]])\r\nfun.apply(thisArg, [argsArray])\r\n```\r\n所以apply和call的区别是call方法接受的是若干个参数列表，而apply接收的是一个包含多个参数的数组。\r\n而bind()方法创建一个新的函数, 当被调用时，将其this关键字设置为提供的值，在调用新函数时，在任何提供之前提供一个给定的参数序列。\r\n```js\r\nvar bindFn = fun.bind(thisArg[, arg1[, arg2[, ...]]])\r\nbindFn()\r\n```\r\n## Demos\r\n```js\r\nvar name = 'window';\r\nvar sayName = function (param) {\r\n    console.log('my name is:' + this.name + ',my param is ' + param)\r\n};\r\n//my name is:window,my param is window param\r\nsayName('window param')\r\n\r\nvar callObj = {\r\n    name: 'call'\r\n};\r\n//my name is:call,my param is call param\r\nsayName.call(callObj, 'call param');\r\n\r\n\r\nvar applyObj = {\r\n    name: 'apply'\r\n};\r\n//my name is:apply,my param is apply param\r\nsayName.apply(applyObj, ['apply param']);\r\n\r\nvar bindObj = {\r\n    name: 'bind'\r\n}\r\nvar bindFn = sayName.bind(bindObj, 'bind param')\r\n//my name is:bind,my param is bind param\r\nbindFn();\r\n\r\n```",
+      "data": {
+        "title": "call,apply和bind区别",
+        "date": "2019-12-13 14:44:31",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "callapply-he-bind-qu-bie"
+    },
+    {
+      "content": "btoa和atob是window对象的两个函数，其中btoa是binary to ascii，用于将binary的数据用ascii码表示，即Base64的编码过程，而atob则是ascii to binary，用于将ascii码解析成binary数据，看一个例子：\r\n```js\r\n// Define the string\r\nvar string = 'Hello World!';\r\n\r\n// Encode the String\r\nvar encodedString = btoa(string);\r\nconsole.log(encodedString); // Outputs: \"SGVsbG8gV29ybGQh\"\r\n\r\n// Decode the String\r\nvar decodedString = atob(encodedString);\r\nconsole.log(decodedString); // Outputs: \"Hello World!\"\r\n```\r\natob和btoa不能编码Unicode字符：\r\n```js\r\nvar string = \"Hello, 中国！\";\r\nwindow.btoa(string);\r\n```\r\n那如何用这种方式支持汉字呢？这里我们可以先将带有非Latin1字符的串先用encodeURIComponent编码：\r\n```\r\nvar string = \"Hello, 中国！\";\r\n//\"SGVsbG8lMkMlMjAlRTQlQjglQUQlRTUlOUIlQkQlRUYlQkMlODE=\"\r\nvar encodedString = btoa(encodeURIComponent(string));\r\nvar decodedString = decodeURIComponent(atob(encodedString));\r\nconsole.log(decodedString); //\"Hello, 中国！\"\r\n```\r\nhttps://my.oschina.net/itblog/blog/1613977\r\nhttps://scotch.io/tutorials/how-to-encode-and-decode-strings-with-base64-in-javascript",
+      "data": {
+        "title": "用 btoa 和 atob 来编码解码Base64",
+        "date": "2019-12-13 10:50:33",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "yong-btoa-he-atob-lai-bian-ma-jie-ma-base64"
+    },
+    {
       "content": "## 子组件替换/合并已有的特性\r\n在Vue中对于绝大多数特性来说，从外部提供给组件的值会替换掉组件内部设置好的值。所以如果传入type=\"text\"就会替换掉 type=\"date\"并把它破坏！庆幸的是，class和 style特性会稍微智能一些，即两边的值会被合并起来，从而得到最终的值，举个例子：\r\n\r\n```html\r\n<div id=\"app\">\r\n  <base-input type=\"text\" class=\"out\"></base-input>\r\n</div>\r\n```\r\n```js\r\nVue.component('base-input', {\r\n  template: `<input type=\"date\" placeholder=\"replace\" class=\"default\">`\r\n})\r\nnew Vue({\r\n  el: '#app',\r\n})\r\n```\r\n在上例中input的type值为date，class为deafault，在使用子组件时，向`子组件`中传入`type=\"text\" class=\"out\"`，此时input的type值会被替换为text，class值会被合并为\"default out\"，那么如果想要禁用属性继承怎么办呢？可以在组件的选项中设置`inheritAttrs: false`，举个例子：\r\n\r\n```js\r\nVue.component('base-input', {\r\n  inheritAttrs: false,\r\n  template: `<input type=\"date\" placeholder=\"replace\" class=\"default\">`\r\n})\r\n```\r\n但是`inheritAttrs: false`选项不会影响style和class的绑定，因此style和class还是会合并",
       "data": {
         "title": "Vue -- inheritAttrs",
@@ -924,7 +969,7 @@
       "fileName": "vue-shi-yong-kai-fa-ji-qiao"
     },
     {
-      "content": "作用域插槽",
+      "content": "## 作用域插槽\r\n```html\r\n<template>\r\n  <div>\r\n    <slot v-if=\"loading\" name=\"loading\">\r\n        <div>Loading ...</div>\r\n    </slot>\r\n    <slot v-else :data='data' :loading='loading'> \r\n    <!-- 简写 -->\r\n    <!-- <slot v-else v-bind={data, loading}> -->\r\n    </slot>\r\n  </div>\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n  props: [\"url\"],\r\n  data: () => ({\r\n    loading: true,\r\n    data: null\r\n  }),\r\n  async created() {\r\n    this.data = await fetch(this.url);\r\n    this.loading = false;\r\n  }\r\n};\r\n</script>\r\n```\r\n**用法**\r\n```html\r\n<lazy-loading url=\"https://www.baidu.com\">\r\n  <template #default=\"{ data,loading }\">\r\n    <div>{{ data }}</div>\r\n    <div>{{ loading }}</div>\r\n  </template>\r\n</lazy-loading>\r\n\r\n```",
       "data": {
         "title": "Vue 作用域插槽",
         "date": "2019-09-16 10:38:35",
