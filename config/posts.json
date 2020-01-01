@@ -1,6 +1,38 @@
 {
   "posts": [
     {
+      "content": "## CSS单行文字居中，多行文字居左的实现方式\r\n### 1.父级`text-align:center`，子级`inline-block+text-align:left`\r\n\r\n```css\r\n.content{\r\n    text-align: center;\r\n}\r\n.text{\r\n    display: inline-block;\r\n    text-align: left;\r\n}\r\n```\r\n### 2.`width:fit-content` + `margin:auto`\r\n块级block元素可以在设置宽度后直接通过margin:0 auto来实现居中，但是必须指明宽度，不然就水平填充了，这两者的关系很微妙，有没有什么办法能够让块级block元素的宽度像inline-block元素跟随内部元素呢？\r\n>width:fit-content可以实现元素收缩效果的同时，保持原本的block水平状态，于是，就可以直接使用margin:auto实现元素向内自适应同时的居中效果了。\r\n```html\r\n<p class=\"text\">这段文字能不能这样判断一下，当文字不足一行时，让它居中显示，当文字超过一行就让它居左</p>\r\n```\r\n```css\r\n.text{\r\n    width: fit-content;\r\n    width: -moz-fit-content;//火狐需要-moz-前缀\r\n    margin: 0 auto;\r\n}\r\n```",
+      "data": {
+        "title": "CSS单行文字居中，多行文字居左的实现方式",
+        "date": "2019-12-25 15:42:11",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "css-dan-xing-wen-zi-ju-zhong-duo-xing-wen-zi-ju-zuo-de-shi-xian-fang-shi"
+    },
+    {
+      "content": "```js\r\njQuery.fn.serializeJSON = function () {\r\n    var json = {};\r\n    jQuery.map(jQuery(this).serializeArray(), function (n, i) {\r\n        var _ = n.name.indexOf('[');\r\n        if (_ > -1) {\r\n            var o = json;\r\n            _name = n.name.replace(/\\]/gi, '').split('[');\r\n            for (var i = 0, len = _name.length; i < len; i++) {\r\n                if (i == len - 1) {\r\n                    if (o[_name[i]]) {\r\n                        if (typeof o[_name[i]] == 'string') {\r\n                            o[_name[i]] = [o[_name[i]]];\r\n                        }\r\n                        o[_name[i]].push(n.value);\r\n                    }\r\n                    else o[_name[i]] = n.value || '';\r\n                }\r\n                else o = o[_name[i]] = o[_name[i]] || {};\r\n            }\r\n        }\r\n        else {\r\n            if (json[n.name] !== undefined) {\r\n                if (!json[n.name].push) {\r\n                    json[n.name] = [json[n.name]];\r\n                }\r\n                json[n.name].push(n.value || '');\r\n            }\r\n            else json[n.name] = n.value || '';\r\n        }\r\n    });\r\n    return json;\r\n};\r\n```",
+      "data": {
+        "title": "jQ serializeJSON 表单格式化，支持数组",
+        "date": "2019-12-19 08:50:16",
+        "tags": [
+          "表单"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "jq-serializejson-biao-dan-ge-shi-hua-zhi-chi-shu-zu"
+    },
+    {
       "content": "## JS正则表达式获取指定字符之后指定字符之前的字符串\r\n```js\r\nvar bgImg = \"url(\\\"https://img30.360buyimg.com/sku/jfs/t26203/262/100869187/204098/1d1479e9/5b84b80bNf39db45f.jpg\\\")\";\r\n```\r\n### 方法1\r\n```js\r\nvar backgroundImageRegex=/(?<=url\\(\").+(?=\"\\))/;\r\nvar matchResult=bgImg.match(backgroundImageRegex);\r\nif(matchResult.length>0){\r\n  alert(matchResult[0]);\r\n}\r\n```\r\n### 方法2\r\n```js\r\nvar backgroundImageRegex=/\\((.*)\\)/;\r\nvar matchResult=bgImg.match(backgroundImageRegex);\r\n```\r\nhttps://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions",
       "data": {
         "title": "js 正则获取指定字符之后指定字符之前",
@@ -1443,6 +1475,11 @@
     }
   ],
   "tags": [
+    {
+      "name": "表单",
+      "slug": "AVxezhJNw",
+      "used": true
+    },
     {
       "name": "video",
       "slug": "G-zs9kZXx",
