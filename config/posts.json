@@ -1,6 +1,102 @@
 {
   "posts": [
     {
+      "content": "https://juejin.im/post/5eb7fc626fb9a0436a7c6af1\r\n```js\r\nimport Vue from 'vue'\r\n\r\nconst preventReClick = Vue.directive('preventReClick', {\r\n  inserted: function(el, binding) {\r\n    el.addEventListener('click', () => {\r\n      if (!el.disabled) {\r\n        el.disabled = true\r\n        setTimeout(() => {\r\n          el.disabled = false\r\n        }, binding.value || 3000) // 传入绑定值就使用，默认3000毫秒内不可重复触发\r\n      }\r\n    })\r\n  }\r\n})\r\n\r\nexport { preventReClick }\r\n\r\n```\r\n```js\r\nimport preventReClick from './plugins/directives.js' //防多次点击，重复提交\r\n```\r\n```js\r\n// 指定延迟1000ms\r\n<el-button  size=\"small\" type=\"primary\" @click=\"handleSave()\" v-preventReClick=\"1000\">保 存</el-button>\r\n\r\n// 默认延迟时间3000\r\n<el-button  size=\"small\" type=\"primary\" @click=\"handleSave()\" v-preventReClick>保 存</el-button>\r\n\r\n```",
+      "data": {
+        "title": "自定义指令directive 表单按钮重复提交",
+        "date": "2020-05-12 20:21:32",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "zi-ding-yi-zhi-ling-directive-biao-dan-an-niu-chong-fu-ti-jiao"
+    },
+    {
+      "content": "https://juejin.im/post/5eb7fc626fb9a0436a7c6af1\r\n```js\r\nimport Vue from 'vue'\r\n\r\nconst preventReClick = Vue.directive('preventReClick', {\r\n  inserted: function(el, binding) {\r\n    el.addEventListener('click', () => {\r\n      if (!el.disabled) {\r\n        el.disabled = true\r\n        setTimeout(() => {\r\n          el.disabled = false\r\n        }, binding.value || 3000) // 传入绑定值就使用，默认3000毫秒内不可重复触发\r\n      }\r\n    })\r\n  }\r\n})\r\n\r\nexport { preventReClick }\r\n\r\n```\r\n```js\r\nimport preventReClick from './plugins/directives.js' //防多次点击，重复提交\r\n```\r\n```js\r\n// 指定延迟1000ms\r\n<el-button  size=\"small\" type=\"primary\" @click=\"handleSave()\" v-preventReClick=\"1000\">保 存</el-button>\r\n\r\n// 默认延迟时间3000\r\n<el-button  size=\"small\" type=\"primary\" @click=\"handleSave()\" v-preventReClick>保 存</el-button>\r\n\r\n```",
+      "data": {
+        "title": "自定义指令directive",
+        "date": "2020-05-12 20:21:32",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "zi-ding-yi-zhi-ling-directive"
+    },
+    {
+      "content": "```js\r\n     let source = [\r\n          {id:1,parentId:0,name:\"一级菜单A\",rank:1},\r\n          {id:2,parentId:0,name:\"一级菜单B\",rank:1},\r\n          {id:3,parentId:0,name:\"一级菜单C\",rank:1},\r\n          {id:4,parentId:1,name:\"二级菜单A-A\",rank:2},\r\n          {id:5,parentId:1,name:\"二级菜单A-B\",rank:2},\r\n          {id:6,parentId:2,name:\"二级菜单B-A\",rank:2},\r\n          {id:7,parentId:4,name:\"三级菜单A-A-A\",rank:3},\r\n          {id:8,parentId:7,name:\"四级菜单A-A-A-A\",rank:4},\r\n          {id:9,parentId:8,name:\"五级菜单A-A-A-A-A\",rank:5},\r\n          {id:10,parentId:9,name:\"六级菜单A-A-A-A-A-A\",rank:6},\r\n          {id:11,parentId:10,name:\"七级菜单A-A-A-A-A-A-A\",rank:7},\r\n          {id:12,parentId:11,name:\"八级菜单A-A-A-A-A-A-A-A\",rank:8},\r\n          {id:13,parentId:12,name:\"九级菜单A-A-A-A-A-A-A-A-A\",rank:9},\r\n          {id:14,parentId:13,name:\"十级菜单A-A-A-A-A-A-A-A-A-A\",rank:10},\r\n      ];\r\n\r\nfunction setTreeData(source) {\r\n    let cloneData = JSON.parse(JSON.stringify(source))\r\n    // 对源数据深度克隆\r\n    return cloneData.filter(father=>{\r\n        // 循环所有项，并添加children属性\r\n        let branchArr = cloneData.filter(child=>father.id == child.parentId);\r\n        // 返回每一项的子级数组\r\n        branchArr.length > 0 ? father.children = branchArr : ''\r\n        //给父级添加一个children属性，并赋值\r\n        return father.parentId == 0;\r\n        //返回第一层\r\n    }\r\n    );\r\n}\r\nconsole.log(setTreeData(source), 1111111)\r\n// 树形数据\r\n\r\n/* 封装函数 */\r\n/* 字段名以字符串的形式传入 */\r\nfunction treeData(source, id, parentId, children) {\r\n    let cloneData = JSON.parse(JSON.stringify(source))\r\n    return cloneData.filter(father=>{\r\n        let branchArr = cloneData.filter(child=>father[id] == child[parentId]);\r\n        branchArr.length > 0 ? father[children] = branchArr : ''\r\n        return father[parentId] == 0\r\n    }\r\n    )\r\n}\r\n// 调用\r\nconsole.table(treeData(source, 'id', 'parentId', 'children'), 22222222222)\r\n\r\nlet nest = (items,id=null,link='parent_id')=>items.filter(item=>item[link] === id).map(item=>({\r\n    ...item,\r\n    children: nest(items, item.id)\r\n}));\r\n\r\n// 调用 3\r\nconsole.log(nest(source, 0, 'parentId'), 33333)\r\n\r\n```",
+      "data": {
+        "title": "treeNest",
+        "date": "2020-05-07 11:16:25",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "treenest"
+    },
+    {
+      "content": "File API使得我们在浏览器端可以访问文件的数据,比如预览文件,获取文件信息(比如文件名,文件内容,文件大小等), 并且可以在前端实现文件下载(可以借助canvas和 window.URL.revokeObjectURL的一些能力).当然我们还可以实现拖拽上传文件这样高用户体验的操作.接下来我们来看看几个实际例子.\r\n\r\n```js\r\nfunction previewFiles(files, previewBox) {\r\n    for (var i = 0; i < files.length; i++) {\r\n      var file = files[i];\r\n      var imageType = /^image\\//;\r\n      \r\n      if (!imageType.test(file.type)) {\r\n        continue;\r\n      }\r\n      \r\n      var img = document.createElement(\"img\");\r\n      previewBox.appendChild(img); // 假设\"preview\"就是用来显示内容的div\r\n      \r\n      var reader = new FileReader();\r\n      reader.onload = (function(imgEl) { \r\n        return function(e) { imgEl.src = e.target.result; }; \r\n      })(img);\r\n      reader.readAsDataURL(file);\r\n    }\r\n  }\r\n\r\n```",
+      "data": {
+        "title": "fileReader 图片预览",
+        "date": "2020-04-20 14:43:06",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "filereader-tu-pian-yu-lan"
+    },
+    {
+      "content": "接口响应的拦截主要是对接口返回的数据进行提取、封装使用，以及对请求异常进行统一配置处理。\r\n```js\r\nrequest.interceptors.response.use(\r\n  response => {\r\n    const data = response.data || {};\r\n    return data;\r\n  },\r\n  error => {\r\n    const code = error.response.status;\r\n    if (code) {\r\n      let msg = '';\r\n      switch (code) {\r\n        case 400:\r\n          msg = '请求错误';\r\n          break;\r\n        case 401:\r\n          msg = '未授权，请登录';\r\n          break;\r\n        case 403:\r\n          msg = '拒绝访问';\r\n          break;\r\n        case 404:\r\n          msg = `请求${error.response.config.url}出现404错误`;\r\n          break;\r\n        case 408:\r\n          msg = '请求超时';\r\n          break;\r\n        case 500:\r\n          msg = '服务器内部错误';\r\n          break;\r\n        case 501:\r\n          msg = '服务未实现';\r\n          break;\r\n        case 502:\r\n          msg = '网关错误';\r\n          break;\r\n        case 503:\r\n          msg = '服务不可用';\r\n          break;\r\n        case 504:\r\n          msg = '网关超时';\r\n          break;\r\n        case 505:\r\n          msg = 'HTTP版本不受支持';\r\n          break;\r\n      }\r\n      Message.error(msg);\r\n    }\r\n    return Promise.reject(error);\r\n  }\r\n)\r\n\r\n```\r\n#### API方法封装\r\n单独封装接口请求方法， GET方法的参数为params，POST方法的参数为data。\r\n```js\r\n// api.js\r\nimport request from '@/utils/request';\r\n\r\nexport function APIPostMethod(data) { // 自定义接口方法\r\n  return request({\r\n    url: '/url1',\r\n    method: 'post',\r\n    data\r\n  });\r\n}\r\nexport function APIGetMethod(params) { // 自定义接口方法\r\n  return request({\r\n    url: '/url2',\r\n    method: 'get',\r\n    params\r\n  });\r\n}\r\n\r\n```\r\n在业务中调用API方法\r\n```js\r\nimport { APIGetMethod, APIPostMethod } from '@/utils/request';\r\nconst params = {}\r\nAPIGetMethod(params).then(res => {\r\n//...\r\n//对数据处理\r\n})\r\n\r\n```",
+      "data": {
+        "title": "Axios 接口响应拦截处理",
+        "date": "2020-04-13 15:53:09",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "axios-jie-kou-xiang-ying-lan-jie-chu-li"
+    },
+    {
+      "content": "## prerender-spa-plugin\r\n### webpack配置\r\n```js\r\n        new PrerenderSPAPlugin({\r\n            staticDir: path.join(__dirname, '../dist'),\r\n            //需要进行渲染的的页面路由\r\n            routes: ['/', '/aaa'],\r\n            renderer: new Renderer({\r\n                // 触发渲染的时间，用于获取数据后再保存渲染结果\r\n                renderAfterTime: 10000,\r\n                // 是否打开浏览器，false 是打开。可用于 debug 检查渲染结果\r\n                headless: false,\r\n                // 在项目的main.js入口中使用 `document.dispatchEvent(new Event('render-event'))` \r\n                renderAfterDocumentEvent: 'render-event', // render-event: 声明的方法名 \r\n            })\r\n        })\r\n        })\r\n\r\n```\r\n### main.js配置\r\n```js\r\nnew Vue({\r\n    el: '#app',\r\n    router,\r\n    components: { App },\r\n    template: '<App/>',\r\n    render: h => h(App),\r\n    mounted() {\r\n        document.dispatchEvent(new Event('render-event'))\r\n    },\r\n})\r\n\r\n```\r\nhttps://juejin.im/post/5e8bedb9f265da47a741253f",
+      "data": {
+        "title": "prerender-spa-plugin",
+        "date": "2020-04-10 11:59:50",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "prerender-spa-plugin"
+    },
+    {
       "content": "[网易新闻移动端布局](https://static.ws.126.net/163/wap/f2e/milk-channel/common.a68191b4.css)\r\n```css\r\n/**\r\n * view-port list:\r\n320x480\r\n320x568\r\n320x570\r\n360x592\r\n360x598\r\n360x604\r\n360x640\r\n360x720\r\n375x667\r\n375x812\r\n393x699\r\n412x732\r\n414x736\r\n480x854\r\n540x960\r\n640x360\r\n720x1184\r\n720x1280\r\n800x600\r\n1024x768\r\n1080x1812\r\n1080x1920\r\n */\r\nhtml {\r\n  font-size: -webkit-calc(13.33333333vw);\r\n  font-size: calc(13.33333333vw);\r\n}\r\n@media screen and (max-width: 320px) {\r\n  html {\r\n    font-size: 42.667px;\r\n    font-size: -webkit-calc(13.33333333vw);\r\n    font-size: calc(13.33333333vw);\r\n  }\r\n}\r\n@media screen and (min-width: 321px) and (max-width: 360px) {\r\n  html {\r\n    font-size: 48px;\r\n    font-size: -webkit-calc(13.33333333vw);\r\n    font-size: calc(13.33333333vw);\r\n  }\r\n}\r\n@media screen and (min-width: 361px) and (max-width: 375px) {\r\n  html {\r\n    font-size: 50px;\r\n    font-size: -webkit-calc(13.33333333vw);\r\n    font-size: calc(13.33333333vw);\r\n  }\r\n}\r\n@media screen and (min-width: 376px) and (max-width: 393px) {\r\n  html {\r\n    font-size: 52.4px;\r\n    font-size: -webkit-calc(13.33333333vw);\r\n    font-size: calc(13.33333333vw);\r\n  }\r\n}\r\n@media screen and (min-width: 394px) and (max-width: 412px) {\r\n  html {\r\n    font-size: 54.93px;\r\n    font-size: -webkit-calc(13.33333333vw);\r\n    font-size: calc(13.33333333vw);\r\n  }\r\n}\r\n@media screen and (min-width: 413px) and (max-width: 414px) {\r\n  html {\r\n    font-size: 55.2px;\r\n    font-size: -webkit-calc(13.33333333vw);\r\n    font-size: calc(13.33333333vw);\r\n  }\r\n}\r\n@media screen and (min-width: 415px) and (max-width: 480px) {\r\n  html {\r\n    font-size: 64px;\r\n    font-size: -webkit-calc(13.33333333vw);\r\n    font-size: calc(13.33333333vw);\r\n  }\r\n}\r\n@media screen and (min-width: 481px) and (max-width: 540px) {\r\n  html {\r\n    font-size: 72px;\r\n    font-size: -webkit-calc(13.33333333vw);\r\n    font-size: calc(13.33333333vw);\r\n  }\r\n}\r\n@media screen and (min-width: 541px) and (max-width: 640px) {\r\n  html {\r\n    font-size: 85.33px;\r\n    font-size: -webkit-calc(13.33333333vw);\r\n    font-size: calc(13.33333333vw);\r\n  }\r\n}\r\n@media screen and (min-width: 641px) and (max-width: 720px) {\r\n  html {\r\n    font-size: 96px;\r\n    font-size: -webkit-calc(13.33333333vw);\r\n    font-size: calc(13.33333333vw);\r\n  }\r\n}\r\n@media screen and (min-width: 721px) and (max-width: 768px) {\r\n  html {\r\n    font-size: 102.4px;\r\n    font-size: -webkit-calc(13.33333333vw);\r\n    font-size: calc(13.33333333vw);\r\n  }\r\n}\r\n@media screen and (min-width: 769px) {\r\n  html {\r\n    font-size: 102.4px;\r\n    /* font-size: -webkit-calc(13.33333333vw);\r\n    font-size: calc(13.33333333vw); */\r\n  }\r\n}\r\n```",
       "data": {
         "title": "vw+rem 移动端布局",

@@ -1,17 +1,32 @@
 {
   "config": {
     "archivesPageSize": 50,
+    "archivesPath": "archives",
     "dateFormat": "YYYY-MM-DD",
     "feedCount": 10,
     "feedFullText": true,
     "footerInfo": "Powered by <a href=\"https://github.com/getgridea/gridea\" target=\"_blank\">Gridea</a>",
     "postPageSize": 12,
+    "postPath": "post",
     "postUrlFormat": "SLUG",
     "showFeatureImage": true,
     "siteDescription": "温故而知新",
     "siteName": "zss - Blog",
+    "tagPath": "tag",
     "tagUrlFormat": "SHORT_ID",
-    "themeName": "pan"
+    "themeName": "simple"
   },
-  "customConfig": {}
+  "customConfig": {
+    "contentBgColor": "#f8f9fa",
+    "customCss": "",
+    "facebook": "",
+    "featureBorderRadius": "3px",
+    "ga": "G-KYYSL5E3FG",
+    "github": "",
+    "menuColor": "#dee2e6",
+    "sidebarWidth": "320px",
+    "twitter": "",
+    "weibo": "",
+    "zhihu": ""
+  }
 }
