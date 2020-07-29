@@ -1,6 +1,166 @@
 {
   "posts": [
     {
+      "content": "## 金额格式化\r\n```js\r\n      var money = 1200;\r\n      var MoneyFormat = (money) => {\r\n        const moneyStr = money.toLocaleString(\"en-IN\", {\r\n          style: \"currency\",\r\n          currency: \"CNY\",\r\n          currencyDisplay: \"symbol\",\r\n          minimumFractionDigits: 2,\r\n        })\r\n        console.log(\"MoneyFormat -> moneyStr\", moneyStr)\r\n        return moneyStr.replace('CN','')\r\n      };\r\n      console.log(MoneyFormat(money)); ￥1,200.00\r\n```",
+      "data": {
+        "title": "MoneyFormat",
+        "date": "2020-07-28 09:55:13",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "moneyformat"
+    },
+    {
+      "content": "## url参数反序列化\r\n一般会通过location.search拿到路由传递的参数，并进行反序列化得到对象\r\n```js\r\nfunction parseUrlSearch() {\r\n  const search = '?age=25&name=TYJ'\r\n  return search.replace(/(^\\?)|(&$)/g, \"\").split(\"&\").reduce((t, v) => {\r\n    const [key, val] = v.split(\"=\");\r\n    t[key] = decodeURIComponent(val);\r\n    return t;\r\n  }, {});\r\n}\r\n\r\nconsole.log(parseUrlSearch()); // { age: \"25\", name: \"TYJ\" }\r\n\r\n```\r\n## url参数序列化\r\n将对象序列化成url参数传递\r\n```js\r\nfunction stringifyUrl(search = {}) {\r\n  return Object.entries(search).reduce(\r\n    (t, v) => `${t}${v[0]}=${encodeURIComponent(v[1])}&`,\r\n    Object.keys(search).length ? \"?\" : \"\"\r\n  ).replace(/&$/, \"\");\r\n}\r\n\r\nconsole.log(stringifyUrl({ age: 27, name: \"YZW\" })); // \"?age=27&name=YZW\"\r\n\r\n```",
+      "data": {
+        "title": "url参数 序列化 反序列化",
+        "date": "2020-07-21 10:44:21",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "url-can-shu-xu-lie-hua-fan-xu-lie-hua"
+    },
+    {
+      "content": "当一个 Vue 实例被创建时，它将 data 对象中的所有的 property 加入到 Vue 的响应式系统中。当这些 property 的值发生改变时，视图将会产生“响应”，即匹配更新为新的值。但是这个过程实际上是比较消耗性能的，所以对于一些有大量数据但只是展示的界面来说，并不需要将property加入到响应式系统中，这样可以提高渲染性能，怎么做呢，你需要了解一下Object.freeze。\r\n在Vue官网中，有这样一段话：这里唯一的例外是使用 Object.freeze()，这会阻止修改现有的 property，也意味着响应系统无法再追踪变化。这段话的意思是，如果我们的数据使用了Object.freeze，就可以让数据脱离响应式系统，那么该如何做呢?\r\n比如下面这个表格，因为只是渲染数据，这时候我们就可以通过Object.freeze来优化性能\r\n\r\n```js\r\n<template>\r\n  <el-table :data=\"tableData\" style=\"width: 100%\">\r\n    <el-table-column prop=\"date\" label=\"日期\" width=\"180\" />\r\n    <el-table-column prop=\"name\" label=\"姓名\" width=\"180\" />\r\n    <el-table-column prop=\"address\" label=\"地址\" />\r\n  </el-table>\r\n</template>\r\n<script>\r\nexport default {\r\n  data() {\r\n    const data = Array(1000)\r\n      .fill(1)\r\n      .map((item, index) => {\r\n        return {\r\n          date: '2020-07-11',\r\n          name: `子君${index}`,\r\n          address: '大西安'\r\n        }\r\n      })\r\n    return {\r\n      // 在这里我们用了Object.freeze\r\n      tableData: Object.freeze(data)\r\n    }\r\n  }\r\n}\r\n</script>\r\n\r\n```\r\n有的同学可能会有疑问，如果我这个表格的数据是滚动加载的，你这样写我不就没法再给tableData添加数据了吗？是，确实没办法去添加数据了，但还是有办法解决的，比如像下面这样\r\n```js\r\nexport default {\r\n  data() {\r\n    return {\r\n      tableData: []\r\n    }\r\n  },\r\n  created() {\r\n    setInterval(() => {\r\n      const data = Array(1000)\r\n        .fill(1)\r\n        .map((item, index) => {\r\n          // 虽然不能冻结整个数组，但是可以冻结每一项数据\r\n          return Object.freeze({\r\n            date: '2020-07-11',\r\n            name: `子君${index}`,\r\n            address: '大西安'\r\n          })\r\n        })\r\n      this.tableData = this.tableData.concat(data)\r\n    }, 2000)\r\n  }\r\n}\r\n\r\n```\r\n合理的使用Object.freeze，是可以节省不少渲染性能，特别对于IE浏览器，效果还是很明显的，赶快去试试吧。",
+      "data": {
+        "title": "提高Vue渲染性能，了解一下Object.freeze",
+        "date": "2020-07-21 09:42:29",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "ti-gao-vue-xuan-ran-xing-neng-liao-jie-yi-xia-objectfreeze"
+    },
+    {
+      "content": "# https://github.com/saucxs/watermark-dom",
+      "data": {
+        "title": "canvas 图片文字水印",
+        "date": "2020-07-21 09:35:21",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "canvas-tu-pian-wen-zi-shui-yin"
+    },
+    {
+      "content": "网页可见区域宽：document.body.clientWidth\r\n网页可见区域高：document.body.clientHeight\r\n网页可见区域宽：document.body.offsetWidth (包括边线的宽)\r\n网页可见区域高：document.body.offsetHeight (包括边线的宽)\r\n网页正文全文宽：document.body.scrollWidth\r\n网页正文全文高：document.body.scrollHeight\r\n网页被卷去的高：document.body.scrollTop\r\n网页被卷去的左：document.body.scrollLeft\r\n网页正文部分上：`window.screenTop`\r\n网页正文部分左：`window.screenLeft`\r\n屏幕分辨率的高：`window.screen.height`\r\n屏幕分辨率的宽：`window.screen.width`\r\n屏幕可用工作区高度：`window.screen.availHeight`\r\n屏幕可用工作区宽度：`window.screen.availWidth`\r\n\r\n \r\n\r\nHTML精确定位:scrollLeft,scrollWidth,clientWidth,offsetWidth\r\nscrollHeight: 获取对象的滚动高度。\r\nscrollLeft:设置或获取位于对象左边界和窗口中目前可见内容的最左端之间的距离\r\nscrollTop:设置或获取位于对象最顶端和窗口中可见内容的最顶端之间的距离\r\nscrollWidth:获取对象的滚动宽度\r\noffsetHeight:获取对象相对于版面或由父坐标 offsetParent 属性指定的父坐标的高度\r\noffsetLeft:获取对象相对于版面或由 offsetParent 属性指定的父坐标的计算左侧位置\r\noffsetTop:获取对象相对于版面或由 offsetTop 属性指定的父坐标的计算顶端位置\r\nevent.clientX 相对文档的水平座标\r\nevent.clientY 相对文档的垂直座标\r\nevent.offsetX 相对容器的水平坐标\r\nevent.offsetY 相对容器的垂直坐标\r\ndocument.documentElement.scrollTop 垂直方向滚动的值\r\nevent.clientX+document.documentElement.scrollTop 相对文档的水平座标+垂直方向滚动的量",
+      "data": {
+        "title": "js获取屏幕的高宽度",
+        "date": "2020-07-21 09:07:34",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "js-huo-qu-ping-mu-de-gao-kuan-du"
+    },
+    {
+      "content": "```js\r\n/**\r\n * \r\n * @param {Element} dom \r\n * @param {String} text \r\n * @param {Number} rotate 标准坐标轴角度\r\n * @param {String} color \r\n * @param {Number} fontSize \r\n * @param {Number} gap 水平间距\r\n * by https://github.com/intbingbing\r\n */\r\nconst drawWaterMark = (\r\n    dom = document.getElementsByTagName('canvas')[0],\r\n    text = '我是水印',\r\n    rotate = -45,\r\n    color = '#CCCDCF',\r\n    fontSize = 17,\r\n    gap = 20\r\n) => {\r\n\r\n    const ctx = dom.getContext('2d')\r\n    ctx.font = `${fontSize}px 'PingFang SC'`\r\n    ctx.fillStyle = color;\r\n    let horizontalWidth = ctx.measureText(text).width\r\n    horizontalWidth = Math.sqrt(horizontalWidth * horizontalWidth / 2) + fontSize\r\n\r\n    const draw = (x, y) => {\r\n        ctx.save();\r\n        ctx.translate(x, y);\r\n        ctx.rotate(-rotate / 180 * Math.PI);\r\n        ctx.fillText(text, 0, 0);\r\n        ctx.restore();\r\n    }\r\n\r\n    const width = dom.width\r\n    const height = dom.height\r\n    for (let i = 0; i < width; i += horizontalWidth + gap) {\r\n        for (let j = 0; j < height; j += horizontalWidth + gap) {\r\n            draw(i, j)\r\n        }\r\n    }\r\n\r\n}\r\n\r\ndrawWaterMark()\r\n```",
+      "data": {
+        "title": "canvas 文字水印 2",
+        "date": "2020-07-21 08:39:08",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "canvas-wen-zi-shui-yin-2"
+    },
+    {
+      "content": "```js\r\n/**\r\n* 为网页添加文字水印\r\n* @param {String} str 要添加的字符串\r\n*/\r\nfunction addWaterMarker(str){\r\n\r\nvar can = document.createElement('canvas');\r\nvar body = document.body;\r\n\r\nbody.appendChild(can);\r\n\r\ncan.width=400;\r\ncan.height=200;\r\ncan.style.display='none';\r\n\r\n\r\nvar cans = can.getContext('2d');\r\ncans.rotate(-20*Math.PI/180);\r\ncans.font = \"16px Microsoft JhengHei\";\r\ncans.fillStyle = \"rgba(17, 17, 17, 0.50)\";\r\ncans.textAlign = 'left';\r\ncans.textBaseline = 'Middle';\r\ncans.fillText(str,can.width/3,can.height/2);\r\n\r\nbody.style.backgroundImage=\"url(\"+can.toDataURL(\"image/png\")+\")\";\r\n\r\n}\r\n```",
+      "data": {
+        "title": "canvas 文字水印",
+        "date": "2020-07-21 08:37:32",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "canvas-wen-zi-shui-yin"
+    },
+    {
+      "content": "```html\r\n<!DOCTYPE html>\r\n<html lang=\"en\">\r\n  <head>\r\n    <meta charset=\"UTF-8\" />\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\r\n    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\" />\r\n    <title>Static Template</title>\r\n  </head>\r\n  <body>\r\n    <h1>金额格式化</h1>\r\n    <h2></h2>\r\n    <script>\r\n      function formatNum(val) {\r\n        // 金额格式化\r\n        var rt = null;\r\n\r\n        if (val <= 999) {\r\n          rt = { val: val.toString().substr(0, 3), unit: \"\" };\r\n          substrNum(rt);\r\n        } else if (val < 9999999) {\r\n          val = Math.round(val / 1000) / 10;\r\n          console.log(val);\r\n          rt = { val: val, unit: \"万\" };\r\n          substrNum(rt);\r\n        } else if (val < 99999999) {\r\n          val = Math.round(val / 1000000) / 10;\r\n          rt = { val: val, unit: \"千万\" };\r\n          substrNum(rt);\r\n        } else if (val < 99999999999) {\r\n          val = Math.round(val / 10000000) / 10;\r\n          rt = { val: val, unit: \"亿\" };\r\n          substrNum(rt);\r\n        } else {\r\n          val = Math.round(val / 10000000) / 10;\r\n          rt = { val: val, unit: \"亿\" };\r\n        }\r\n        return rt;\r\n      }\r\n\r\n      function substrNum(rt) {\r\n        rt.val = rt.val.toString().substr(0, 3);\r\n        console.log(rt.val);\r\n        console.log(rt.val.charAt(rt.val.length - 1));\r\n        if (rt.val.charAt(rt.val.length - 1) == \".\") {\r\n          //判断末尾是否 \".\"\r\n          rt.val = rt.val.substr(0, 2);\r\n        }\r\n      }\r\n      var result = formatNum(51696991);\r\n      console.log(result);\r\n      document.querySelector(\"h2\").innerHTML = result.val + result.unit;\r\n    </script>\r\n  </body>\r\n</html>\r\n\r\n```",
+      "data": {
+        "title": "金额格式化",
+        "date": "2020-07-17 09:39:17",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "jin-e-ge-shi-hua"
+    },
+    {
+      "content": "```js\r\nexport default {  \r\n    200: '请求被正确处理并返回了结果',  \r\n    201: '新增或修改数据成功',  \r\n    202: '请求已进入任务队列，被异步处理',\r\n    203: '令牌或登录状态失效',\r\n    204: '删除数据成功',  \r\n    301: '请求的资源被永久重定向到新的位置，将从新的地址重新请求',  \r\n    302: '请求的资源被临时重定向到新的位置',  \r\n    304: '表示，客户端有缓存文件并向服务器发送了一个options请求，服务器返回304 Not Modified,告诉客户端，原来缓存的文件没有修改过，可以继续使用原来缓存的文件。'\r\n    400: '请求参数错误，服务器没有对数据做新建或修改',  \r\n    401: '无访问权限，用户名、密码、令牌错误',  \r\n    403: '得到访问授权，但访问是被禁止',  \r\n    404: '访问的是不存在的资源',  \r\n    405: '请求方式不正确',  \r\n    406: '请求的数据格式不是服务接收的类型',  \r\n    410: '请求的资源被永久删除',  \r\n    422: '服务器创建对象时发生错误',  \r\n    500: '服务器不可用，未返回正确的数据',  \r\n    502: '服务器网关错误',  \r\n    503: '服务器过载或维护中',  \r\n    504: '服务器响应超时',\r\n}\r\n\r\n作者：gejumona\r\n链接：https://juejin.im/post/5f0d10e5e51d45347c1b86a0\r\n来源：掘金\r\n著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。\r\n```",
+      "data": {
+        "title": "HTTP常见请求状态码及解释",
+        "date": "2020-07-16 14:14:14",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "http-chang-jian-qing-qiu-zhuang-tai-ma-ji-jie-shi"
+    },
+    {
+      "content": "```js\r\n//后台数据的模拟：\r\n    let dataList = [\r\n        {id: '1', name: '小狗', age: 5},\r\n        {id: '2', name: '小羊', age: 8},\r\n        {id: '3', name: '小猪', age: 10},\r\n        {id: '4', name: '小牛', age: 12}\r\n    ];\r\n    //前台数据的模拟：\r\n    let myList = [\r\n        {myId: '1001', age: 18, myName: '张三'},\r\n        {myId: '1001', age: 18, myName: '李四'}\r\n    ];\r\n    //数据中，数据的属性名称不同。\r\n\r\n    //1.声明两个数组： 要求两个数组中的属性，一一对应；\r\n    let myArr = ['myId', 'age', 'myName'];\r\n    let dataArr = ['id', 'age', 'name'];\r\n    // 2.调用适配函数，进行数据的转换；\r\n    // console.log('没有转换的前台的数据:',myList);\r\n    let data = myDataAdaptor(myList, dataList, myArr, dataArr);\r\n    // console.log('转换后的前台的数据:',data);\r\n    // 3. 自己页面逻辑中，如渲染一个table。\r\n\r\n//封装的适配函数：\r\n    function myDataAdaptor(myList, dataList, myArr, dataArr) {\r\n        let newList = [];  //存储函数转换后的数据\r\n//每循环一次，把后台数组中，一个对象中的指定的属性的值，赋值给前台模拟数据中对象指定的属性。\r\n        for (let i = 0; i < dataList.length; i++) {\r\n            let tempObj = dataList[i]; //后台返回的某一条数据，{id: '1', name: '肖明亚', age: 28}；\r\n            let newObj = {};//一定是一个新的空对象。\r\n            let j = 0;\r\n            //for--in循环完成后，就把后台的一个对象的数据，变成前台的对象数据\r\n            for (let key in tempObj) {\r\n                // myArr[j] 去换 myArr数组中的值； j是0时， 'myId'\r\n                // dataArr[j] 去换 dataArr数组中的值；j是0时， 'id'\r\n                // 这儿实现对象数据的转换；\r\n                newObj[   myArr[j]  ] = tempObj[  dataArr[j]  ]\r\n                // newObj[  'myId' ] = tempObj[  'id'  ]\r\n                // newObj.myId = 1;\r\n/*\r\n                 拿对象中的属性名：\r\n                let q = myArr[j];  //'myId', 'age', 'myName'\r\n                let h = dataArr[j];// 'id', 'age', 'name'\r\n                newObj[q] = tempObj[h]\r\n                j=0  newObj['myId'] = tempObj['id']\r\n                j=1  newObj['age'] = tempObj['age']\r\n                j=2  newObj['myName'] = tempObj['name']\r\n*/\r\n                j++;\r\n            }\r\n            newList.push(newObj)\r\n        }\r\n        return newList;\r\n    }\r\n————————————————\r\n版权声明：本文为CSDN博主「李@@」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。\r\n原文链接：https://blog.csdn.net/weixin_44571638/java/article/details/107007629\r\n```",
+      "data": {
+        "title": "实现前后端键名不一致的数据交换",
+        "date": "2020-07-16 14:11:23",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "shi-xian-qian-hou-duan-jian-ming-bu-yi-zhi-de-shu-ju-jiao-huan"
+    },
+    {
       "content": "https://juejin.im/post/5eb7fc626fb9a0436a7c6af1\r\n```js\r\nimport Vue from 'vue'\r\n\r\nconst preventReClick = Vue.directive('preventReClick', {\r\n  inserted: function(el, binding) {\r\n    el.addEventListener('click', () => {\r\n      if (!el.disabled) {\r\n        el.disabled = true\r\n        setTimeout(() => {\r\n          el.disabled = false\r\n        }, binding.value || 3000) // 传入绑定值就使用，默认3000毫秒内不可重复触发\r\n      }\r\n    })\r\n  }\r\n})\r\n\r\nexport { preventReClick }\r\n\r\n```\r\n```js\r\nimport preventReClick from './plugins/directives.js' //防多次点击，重复提交\r\n```\r\n```js\r\n// 指定延迟1000ms\r\n<el-button  size=\"small\" type=\"primary\" @click=\"handleSave()\" v-preventReClick=\"1000\">保 存</el-button>\r\n\r\n// 默认延迟时间3000\r\n<el-button  size=\"small\" type=\"primary\" @click=\"handleSave()\" v-preventReClick>保 存</el-button>\r\n\r\n```",
       "data": {
         "title": "自定义指令directive 表单按钮重复提交",
