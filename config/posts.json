@@ -1,6 +1,102 @@
 {
   "posts": [
     {
+      "content": "## 七种基本数据类型\r\n`null，undefined，string，number，boolean，symbol（es6新增），bigInt（es10新增）`\r\n## 一种特殊类型\r\n`Object`",
+      "data": {
+        "title": "js 七种基本数据类型 一种特殊类型",
+        "date": "2020-08-06 16:37:27",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "js-qi-chong-ji-ben-shu-ju-lei-xing-yi-chong-te-shu-lei-xing"
+    },
+    {
+      "content": "```js\r\n// 设置跨域\r\napp.use(cors({\r\n    origin: function (ctx) {\r\n        if (ctx.url.indexOf(config.API_VERSION_PATH) > -1) {\r\n          return isDev ? 'http://192.xxx.1.3:8000' : 'http://qutanqianduan.cn'; // 允许来自指定域名请求, 如果设置为*，前端将获取不到错误的响应头\r\n        }\r\n    },\r\n    exposeHeaders: ['WWW-Authenticate', 'Server-Authorization', 'x-show-msg'],\r\n    maxAge: 5,  //  该字段可选，用来指定本次预检请求的有效期，单位为秒\r\n    credentials: true,  // 允许携带用户凭证\r\n    allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // 允许的请求方法\r\n    allowHeaders: ['Content-Type', 'Authorization', 'Accept', 'X-Requested-With'] // 允许接收的头部字段\r\n}))\r\n\r\n```",
+      "data": {
+        "title": "node cors 跨域设置",
+        "date": "2020-08-04 11:01:05",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "node-cors-kua-yu-she-zhi"
+    },
+    {
+      "content": "## Vue的生命周期（四季轮回）\r\n```js\r\n# src/core/shared/constants.js\r\n# 定义生命周期钩子函数\r\nexport const LIFECYCLE_HOOKS = [  'beforeCreate', // 是new Vue()之后触发的第一个钩子，在当前阶段data、methods、computed以及watch上的数据和方法都不能被访问。 \r\n 'created', // 在实例创建完成后发生，当前阶段已经完成了数据观测，也就是可以使用数据，更改数据，在这里更改数据不会触发updated函数。可以做一些初始数据的获取，在当前阶段无法与Dom进行交互，如果非要想，可以通过vm.$nextTick来访问Dom。  \r\n'beforeMount', // 发生在挂载之前，在这之前template模板已导入渲染函数编译。而当前阶段虚拟Dom已经创建完成，即将开始渲染。在此时也可以对数据进行更改，不会触发updated。 \r\n 'mounted', // 在挂载完成后发生，在当前阶段，真实的Dom挂载完毕，数据完成双向绑定，可以访问到Dom节点，使用$refs属性对Dom进行操作。 \r\n 'beforeUpdate', // 发生在更新之前，也就是响应式数据发生更新，虚拟dom重新渲染之前被触发，你可以在当前阶段进行更改数据，不会造成重渲染。 \r\n 'updated', // 发生在更新完成之后，当前阶段组件Dom已完成更新。要注意的是避免在此期间更改数据，因为这可能会导致无限循环的更新。 \r\n 'beforeDestroy', // 发生在实例销毁之前，在当前阶段实例完全可以被使用，我们可以在这时进行善后收尾工作，比如清除计时器。 \r\n 'destroyed', // 发生在实例销毁之后，这个时候只剩下了dom空壳。组件已被拆解，数据绑定被卸除，监听被移出，子实例也统统被销毁。  \r\n'activated', // 钩子函数是专门为 `keep-alive` 组件定制的钩子，结合 `keep-alive` 组件，可以实现从其他页面跳转到这个页面时会请求数据，当从下级页面返回这个页面时就不会重新请求数据  \r\n 'deactivated',  // 钩子函数是专门为 `keep-alive` 组件定制的钩子   'errorCaptured',  \r\n'serverPrefetch']\r\n```",
+      "data": {
+        "title": "Vue的生命周期",
+        "date": "2020-08-04 09:33:53",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "vue-de-sheng-ming-zhou-qi"
+    },
+    {
+      "content": "```js\r\n<template>\r\n  <div class=\"echarts\"></div>\r\n</template>\r\n<script>\r\nexport default {\r\n  mounted() {\r\n    this.chart = echarts.init(this.$el)\r\n    // 请求数据，赋值数据 等等一系列操作...\r\n    // 监听窗口发生变化，resize组件\r\n    window.addEventListener('resize', this.$_handleResizeChart)\r\n  },\r\n  updated() {\r\n    // 干了一堆活\r\n  },\r\n  created() {\r\n    // 干了一堆活\r\n  },\r\n  beforeDestroy() {\r\n    // 组件销毁时，销毁监听事件\r\n    window.removeEventListener('resize', this.$_handleResizeChart)\r\n  },\r\n  methods: {\r\n    $_handleResizeChart() {\r\n      this.chart.resize()\r\n    },\r\n    // 其他一堆方法\r\n  }\r\n}\r\n</script>\r\n```\r\n## 优化\r\n```js\r\nexport default {\r\n  mounted() {\r\n    this.chart = echarts.init(this.$el)\r\n    // 请求数据，赋值数据 等等一系列操作...\r\n    \r\n    // 监听窗口发生变化，resize组件\r\n    window.addEventListener('resize', this.$_handleResizeChart)\r\n    // 通过hook监听组件销毁钩子函数，并取消监听事件\r\n    this.$once('hook:beforeDestroy', () => {\r\n      window.removeEventListener('resize', this.$_handleResizeChart)\r\n    })\r\n  },\r\n  updated() {},\r\n  created() {},\r\n  methods: {\r\n    $_handleResizeChart() {\r\n      // this.chart.resize()\r\n    }\r\n  }\r\n}\r\n```",
+      "data": {
+        "title": "echarts vue封装",
+        "date": "2020-07-31 15:58:45",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "echarts-vue-feng-zhuang"
+    },
+    {
+      "content": "## 提高Vue渲染性能，了解一下Object.freeze\r\n当一个 Vue 实例被创建时，它将 data 对象中的所有的 property 加入到 Vue 的响应式系统中。当这些 property 的值发生改变时，视图将会产生“响应”，即匹配更新为新的值。但是这个过程实际上是比较消耗性能的，所以对于一些有大量数据但只是展示的界面来说，并不需要将property加入到响应式系统中，这样可以提高渲染性能，怎么做呢，你需要了解一下Object.freeze。\r\n在Vue官网中，有这样一段话：这里唯一的例外是使用 Object.freeze()，这会阻止修改现有的 property，也意味着响应系统无法再追踪变化。这段话的意思是，如果我们的数据使用了Object.freeze，就可以让数据脱离响应式系统，那么该如何做呢?\r\n比如下面这个表格，因为只是渲染数据，这时候我们就可以通过Object.freeze来优化性能\r\n \r\n ```js\r\n <template>\r\n  <el-table :data=\"tableData\" style=\"width: 100%\">\r\n    <el-table-column prop=\"date\" label=\"日期\" width=\"180\" />\r\n    <el-table-column prop=\"name\" label=\"姓名\" width=\"180\" />\r\n    <el-table-column prop=\"address\" label=\"地址\" />\r\n  </el-table>\r\n</template>\r\n<script>\r\nexport default {\r\n  data() {\r\n    const data = Array(1000)\r\n      .fill(1)\r\n      .map((item, index) => {\r\n        return {\r\n          date: '2020-07-11',\r\n          name: `子君${index}`,\r\n          address: '大西安'\r\n        }\r\n      })\r\n    return {\r\n      // 在这里我们用了Object.freeze\r\n      tableData: Object.freeze(data)\r\n    }\r\n  }\r\n}\r\n</script>\r\n ```\r\n 有的同学可能会有疑问，如果我这个表格的数据是滚动加载的，你这样写我不就没法再给tableData添加数据了吗？是，确实没办法去添加数据了，但还是有办法解决的，比如像下面这样\r\n ```js\r\n export default {\r\n  data() {\r\n    return {\r\n      tableData: []\r\n    }\r\n  },\r\n  created() {\r\n    setInterval(() => {\r\n      const data = Array(1000)\r\n        .fill(1)\r\n        .map((item, index) => {\r\n          // 虽然不能冻结整个数组，但是可以冻结每一项数据\r\n          return Object.freeze({\r\n            date: '2020-07-11',\r\n            name: `子君${index}`,\r\n            address: '大西安'\r\n          })\r\n        })\r\n      this.tableData = this.tableData.concat(data)\r\n    }, 2000)\r\n  }\r\n}\r\n```",
+      "data": {
+        "title": "Object.freeze",
+        "date": "2020-07-31 15:54:00",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "objectfreeze"
+    },
+    {
+      "content": "浏览器内的内容即然可以滚动，那么我们就可以获取到浏览器滚动的距离思考一个问题？浏览器真的滚动了吗？其实我们的浏览器是没有滚动的，是一直在那里滚动的是什么？是我们的页面所以说，其实浏览器没有动，只不过是页面向上走了所以，这个已经不能单纯的算是浏览器的内容了，而是我们页面的内容所以不是在用 window 对象了，而是使用 document 对象\r\n\r\n```js\r\nwindow.onscroll = function () {\r\n console.log(document.body.scrollTop)\r\n console.log(document.documentElement.scrollTop)\r\n  console.log(window.pageYOffset)\r\n}\r\n```\r\n两个都是获取页面向上滚动的距离区别：IE 浏览器没有 DOCTYPE 声明的时候，用这两个都行有 DOCTYPE 声明的时候，只能用 document.documentElement.scrollTop Chrome 和 FireFox没有 DOCTYPE 声明的时候，用 document.body.scrollTop有 DOCTYPE 声明的时候，用 document.documentElement.scrollTop Safari两个都不用，使用一个单独的方法 window.pageYOffset\r\n",
+      "data": {
+        "title": "浏览器滚动的距离",
+        "date": "2020-07-31 09:37:28",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "liu-lan-qi-gun-dong-de-ju-chi"
+    },
+    {
       "content": "## 金额格式化\r\n```js\r\n      var money = 1200;\r\n      var MoneyFormat = (money) => {\r\n        const moneyStr = money.toLocaleString(\"en-IN\", {\r\n          style: \"currency\",\r\n          currency: \"CNY\",\r\n          currencyDisplay: \"symbol\",\r\n          minimumFractionDigits: 2,\r\n        })\r\n        console.log(\"MoneyFormat -> moneyStr\", moneyStr)\r\n        return moneyStr.replace('CN','')\r\n      };\r\n      console.log(MoneyFormat(money)); ￥1,200.00\r\n```",
       "data": {
         "title": "MoneyFormat",
