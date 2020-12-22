@@ -5,7 +5,12 @@ tags: []
 published: true
 hideInList: false
 feature: 
+isTop: false
 ---
+## target、currentTarget的区别？
+currentTarget当前所绑定事件的元素
+
+target当前被点击的元素
 ### 
 >event.currentTarget 获取到的是发起事件的标签元素 event.target 获取的是触发事件的标签元素
 ### event对象的常用属性和方法：

@@ -7,6 +7,8 @@ hideInList: false
 feature: 
 isTop: false
 ---
+## 方法1
+https://blog.csdn.net/Mr_JavaScript/article/details/82817177
 ```js
      let source = [
           {id:1,parentId:0,name:"一级菜单A",rank:1},
@@ -53,7 +55,7 @@ function treeData(source, id, parentId, children) {
     }
     )
 }
-// 调用
+// 调用2
 console.table(treeData(source, 'id', 'parentId', 'children'), 22222222222)
 
 let nest = (items,id=null,link='parent_id')=>items.filter(item=>item[link] === id).map(item=>({
@@ -63,5 +65,35 @@ let nest = (items,id=null,link='parent_id')=>items.filter(item=>item[link] === i
 
 // 调用 3
 console.log(nest(source, 0, 'parentId'), 33333)
+
+```
+## 方法2
+```js
+var models = [
+ {id: 1, title: 'hello-0', parent: 0},
+ {id: 3, title: 'hello-1', parent: 1},
+ {id: 4, title: 'hello-3', parent: 3},
+ {id: 5, title: 'hello-4', parent: 4},
+ {id: 2, title: 'hello-0', parent: 0},
+ {id: 6, title: 'hello-4', parent: 4},
+ {id: 7, title: 'hello-2', parent: 2},
+ {id: 8, title: 'hello-10', parent: 10}
+];
+var nestedStructure = getNestedChildren(models, 0);
+console.log(nestedStructure);
+
+function getNestedChildren(arr, parent) {
+    var out = []
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i].parent == parent) {
+            var children = getNestedChildren(arr, arr[i].id)
+            if (children.length) {
+                arr[i].children = children
+            }
+            out.push(arr[i])
+        }
+    }
+    return out
+}
 
 ```

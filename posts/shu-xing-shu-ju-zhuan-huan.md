@@ -1,10 +1,11 @@
 ---
 title: '🌴树形数据转换'
 date: 2019-09-19 17:52:17
-tags: [js utils]
+tags: [js utils,tree]
 published: true
 hideInList: false
 feature: 
+isTop: false
 ---
 ```javascript
 /**
@@ -37,7 +38,7 @@ export function treeDataTranslate (data, id = 'id', pid = 'parentId') {
 }
 ```
 ## 将数组中的parentId列表取出，倒序排列
-```
+```js
 /**
  * 将数组中的parentId列表取出，倒序排列
  * @param {*} data
