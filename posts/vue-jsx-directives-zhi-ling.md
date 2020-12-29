@@ -18,3 +18,9 @@ isTop: false
              )
            }
 ```
+```js
+const directives = [
+  { name: 'my-directive', value: 123, modifiers: { stop: true },arg: 'edit' }
+]
+return <div {...{ directives }}/>
+```
