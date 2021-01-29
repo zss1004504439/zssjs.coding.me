@@ -1,6 +1,106 @@
 {
   "posts": [
     {
+      "content": "```js\r\n<template>\r\n  <div class=\"editor\">\r\n    <TinymceEditor id=\"editor-tinymce\" ref=\"ZEditor\" v-model=\"myValue\" :init=\"completeSetting\" :disabled=\"disabled\" />\r\n  </div>\r\n</template>\r\n\r\n<script>\r\nimport tinymce from 'tinymce/tinymce'\r\nimport TinymceEditor from '@tinymce/tinymce-vue'\r\n// 样式\r\n// import 'tinymce/skins/content/default/content.min.css'\r\n// import 'tinymce/skins/ui/oxide/skin.min.css'\r\n// import 'tinymce/skins/ui/oxide/content.min.css'\r\n\r\n// 主题\r\nimport 'tinymce/themes/silver/theme'\r\nimport 'tinymce/icons/default/icons'\r\n\r\nimport 'tinymce/plugins/advlist'\r\nimport 'tinymce/plugins/anchor'\r\nimport 'tinymce/plugins/autolink'\r\nimport 'tinymce/plugins/autosave'\r\nimport 'tinymce/plugins/autoresize'\r\n\r\nimport 'tinymce/plugins/charmap'\r\nimport 'tinymce/plugins/code'\r\nimport 'tinymce/plugins/codesample'\r\nimport 'tinymce/plugins/colorpicker'\r\nimport 'tinymce/plugins/contextmenu'\r\nimport 'tinymce/plugins/directionality'\r\nimport 'tinymce/plugins/emoticons'\r\nimport 'tinymce/plugins/fullscreen' // 全屏插件\r\nimport 'tinymce/plugins/help'\r\nimport 'tinymce/plugins/hr'\r\n\r\nimport 'tinymce/plugins/image' // 图片插件\r\nimport 'tinymce/plugins/imagetools'\r\nimport 'tinymce/plugins/insertdatetime'\r\n\r\nimport 'tinymce/plugins/link' // 链接插件\r\nimport 'tinymce/plugins/lists'\r\nimport 'tinymce/plugins/media' // 媒体插件\r\nimport 'tinymce/plugins/noneditable'\r\nimport 'tinymce/plugins/nonbreaking'\r\nimport 'tinymce/plugins/quickbars' // 快速栏插件\r\n\r\nimport 'tinymce/plugins/table' // 表格插件\r\nimport 'tinymce/plugins/template'\r\nimport 'tinymce/plugins/textcolor'\r\nimport 'tinymce/plugins/textpattern'\r\nimport 'tinymce/plugins/wordcount'\r\nimport 'tinymce/plugins/searchreplace'\r\n\r\nimport 'tinymce/plugins/pagebreak'\r\nimport 'tinymce/plugins/paste'\r\nimport 'tinymce/plugins/preview'\r\nimport 'tinymce/plugins/print'\r\nimport 'tinymce/plugins/visualblocks'\r\nimport 'tinymce/plugins/visualchars'\r\n\r\nimport 'tinymce/plugins/importword'\r\nimport 'tinymce/plugins/indent2em'\r\nimport 'tinymce/plugins/formatpainter'\r\n\r\nexport default {\r\n  name: 'ZEditor',\r\n  components: {\r\n    TinymceEditor\r\n  },\r\n  props: {\r\n    value: {\r\n      type: String,\r\n      default: ''\r\n    },\r\n    setting: {\r\n      type: Object,\r\n      default: () => {}\r\n    },\r\n    disabled: {\r\n      type: Boolean,\r\n      default: false\r\n    }\r\n  },\r\n  data () {\r\n    return {\r\n      defaultSetting: {\r\n        language_url: '/admin_jzm/tinymce/langs/zh_CN.js',\r\n        language: 'zh_CN',\r\n        // theme: 'silver',\r\n        // theme_url: '/admin_jzm/tinymce/mytheme.js',\r\n        // skin: 'oxide',\r\n        skin_url: 'http://127.0.0.1:8001/admin_jzm/tinymce/skins/ui/oxide',\r\n        // skin_url: '/admin_jzm/tinymce/skins/ui/oxide',\r\n        min_height: 250,\r\n        max_height: 600,\r\n        selector: 'textarea',\r\n        plugins:\r\n          'print preview searchreplace autolink directionality visualblocks visualchars fullscreen image link media template code codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists wordcount imagetools textpattern help noneditable autosave indent2em autoresize formatpainter importword quickbars paste',\r\n\r\n        toolbar: `code undo redo restoredraft | cut copy paste pastetext | forecolor backcolor bold italic underline strikethrough link anchor | alignleft aligncenter alignright alignjustify outdent indent | \\\r\n        styleselect formatselect fontselect fontsizeselect | bullist numlist | blockquote subscript superscript removeformat | \\\r\n        table image media charmap hr pagebreak insertdatetime print preview | codesample fullscreen | indent2em lineheight formatpainter importword restoredraft`,\r\n        toolbar_sticky: false, // 粘性工具栏\r\n        quickbars_insert_toolbar: '', // quickimage quicktable\r\n        quickbars_selection_toolbar:\r\n          'removeformat | bold italic underline strikethrough | fontsizeselect forecolor backcolor',\r\n        branding: false, // 隐藏右下角技术支持\r\n        menubar: true, // 隐藏最上方menu\r\n        statusbar: false, // 隐藏编辑器底部的状态栏\r\n        convert_urls: false,\r\n        toolbar_mode: 'wrap', // sliding & wrap\r\n        // 字号\r\n        // fontsize_formats: '12px 14px 16px 18px 24px 36px 48px 56px 72px',\r\n        // 字体\r\n        font_formats:\r\n          '微软雅黑=Microsoft YaHei,Helvetica Neue,PingFang SC,sans-serif;苹果苹方=PingFang SC,Microsoft YaHei,sans-serif;宋体=simsun,serif;仿宋体=FangSong,serif;黑体=SimHei,sans-serif;Arial=arial,helvetica,sans-serif;Arial Black=arial black,avant garde;Book Antiqua=book antiqua,palatino;',\r\n        link_list: [{ title: '预置链接1', value: 'http://www.baidu.com' }],\r\n        image_list: [{ title: '预置图片1', value: 'https://www.baidu.com/img/bd_logo1.png' }],\r\n        // importcss_append: true, // 配合插件 importcss\r\n        // content_security_policy: \"script-src *;\", //内容安全策略\r\n        // extended_valid_elements: 'script[src]', // 扩展有效元素\r\n        // 为内容模板插件提供预置模板\r\n        templates: [\r\n          {\r\n            title: '模板文档',\r\n            description: '介绍文字',\r\n            content:\r\n              '<div class=\"mceTmpl\"><span class=\"cdate\">CDATE</span>，<span class=\"mdate\">MDATE</span>，我的内容</div>'\r\n          }\r\n        ],\r\n        insertdatetime_formats: ['%Y年%m月%d日', '%H点%M分%S秒', '%Y-%m-%d', '%H:%M:%S'],\r\n        paste_data_images: true, // 配合插件 paste 允许粘贴图像\r\n        autosave_ask_before_unload: true, // 当关闭或跳转URL时，弹出提示框提醒用户仍未保存变更内容。默认开启提示。\r\n        // images_upload_base_path: '/', // 给返回的相对路径指定它所相对的基本路径。\r\n        images_upload_handler: (blobInfo, success, failFun) => {\r\n          const img = 'data:image/jpeg;base64,' + blobInfo.base64()\r\n          success(img)\r\n        }\r\n      },\r\n      myValue: this.value\r\n    }\r\n  },\r\n  computed: {\r\n    completeSetting () {\r\n      return Object.assign(this.defaultSetting, this.setting)\r\n    }\r\n  },\r\n  watch: {\r\n    myValue (newValue) {\r\n      this.$emit('input', newValue)\r\n    },\r\n    value (newValue) {\r\n      this.myValue = newValue\r\n    }\r\n  },\r\n  mounted () {\r\n    // tinymce.init({})\r\n  },\r\n  beforeDestroy () {\r\n    tinymce.get('editor-tinymce').destroy()\r\n  }\r\n}\r\n</script>\r\n\r\n<style lang=\"less\" scoped>\r\n::v-deep .tox-tinymce {\r\n  border: 1px solid #dcdfe6;\r\n  border-radius: 4px;\r\n}\r\n</style>\r\n```",
+      "data": {
+        "title": "Tinymce demo",
+        "date": "2021-01-27 13:43:36",
+        "tags": [
+          "editor"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "tinymce-demo"
+    },
+    {
+      "content": "```js\r\nconsole.log('*** app start ***');\r\nconsole.log('***      module.filename = ' + module.filename + ' ***');\r\nconsole.log('***           __filename = ' + __filename + ' ***');\r\nconsole.log('***            __dirname = ' + __dirname + ' ***');\r\nconsole.log('***        process.cwd() = ' + process.cwd() + ' ***');\r\nconsole.log('*** require.main.filename= ' + require.main.filename + ' ***');\r\nconsole.log('*** app end ***');\r\n\r\n    module.filename：开发期间，该行代码所在的文件。\r\n    __filename：始终等于 module.filename。\r\n    __dirname：开发期间，该行代码所在的目录。\r\n    process.cwd()：运行node的工作目录，可以使用  cd /d 修改工作目录。\r\n    require.main.filename：用node命令启动的module的filename, 如 node xxx，这里的filename就是这个xxx。\r\n\r\n    require()方法的坐标路径是：module.filename；fs.readFile()的坐标路径是：process.cwd()。\r\n```\r\n",
+      "data": {
+        "title": "node path",
+        "date": "2021-01-27 10:06:19",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "node-path"
+    },
+    {
+      "content": "https://juejin.cn/post/6844903612993241101\r\n## 防止内容被切分\r\n",
+      "data": {
+        "title": "html转PDF文件",
+        "date": "2021-01-21 19:05:15",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "html-zhuan-pdf-wen-jian"
+    },
+    {
+      "content": "```js\r\nwindow.open('url')\r\n```\r\n```js\r\n<a href='url' download='文件名'>点击下载PDF</a>\r\n```\r\n### 额外\r\n这种需求的解决方式就是将PDF文件的 MIME type 改为 `application/octet-stream` 并加入 `Content-Disposition:attachment header`，原本的 pdf 文件 MIME type 为 `application/pdf`，浏览器识别到这个 type 之后会自动在浏览器打开，所以说我们在这里修改 type 即可。\r\n\r\n修改的方法有两种，一种是在后端进行修改，上传文件或者返回文件的时候进行操作，但是绝大多数情况下文件都是存储到 cdn 服务器中的，后端也不方便对其进行操作，这个时候就需要前端来修改了。\r\n```js\r\n/**\r\n * @deprecated 下载文件\r\n * @param {string} url \r\n * @param {string} filename\r\n */\r\nhandleFileDownload = (url, filename) => {\r\n  // 创建 a 标签\r\n  let a = document.createElement('a');\r\n  a.href = url;\r\n  a.download = filename;\r\n  a.click();\r\n}\r\n\r\n/**\r\n * @deprecated 处理 pdf url，使其不在浏览器打开\r\n * @param {string} url\r\n */\r\nhandlePdfLink = (url, filename) => {\r\n  fetch(url, {\r\n    method: 'get',\r\n    responseType: 'arraybuffer',\r\n  })\r\n    .then(function (res) {\r\n      if (res.status !== 200) {\r\n        return res.json()\r\n      }\r\n      return res.arrayBuffer()\r\n    })\r\n    .then((blobRes) => {\r\n    \t// 生成 Blob 对象，设置 type 等信息\r\n      const e = new Blob([blobRes], {\r\n        type: 'application/octet-stream',\r\n        'Content-Disposition':'attachment'\r\n      })\r\n      // 将 Blob 对象转为 url\r\n      const link = window.URL.createObjectURL(e)\r\n      handleFileDownload(link, filename)\r\n    }).catch(err => {\r\n      console.error(err)\r\n    })\r\n}\r\n```\r\n网友解决方案\r\n```js\r\n我的做法是直接在nginx里面配置，拦截掉所有.pdf后缀的路径\r\nproxy_hide_header 'Content-Type';\r\nadd_header Content-Type application/octet-stream;\r\n这样子 无需任何代码改动\r\n```\r\nhttps://www.cnblogs.com/Jacob98/p/directly-download-pdf.html",
+      "data": {
+        "title": "如何使 pdf 文件在浏览器里面直接下载而不是打开",
+        "date": "2021-01-20 09:14:46",
+        "tags": [
+          "pdf"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "ru-he-shi-pdf-wen-jian-zai-liu-lan-qi-li-mian-zhi-jie-xia-zai-er-bu-shi-da-kai"
+    },
+    {
+      "content": "```js\r\n<template>\r\n          <el-table\r\n            border\r\n            size=\"mini\"\r\n            height=\"100%\"\r\n            :span-method=\"cellMerge\"\r\n            :data=\"tableData\"\r\n          >\r\n            <el-table-column\r\n              label=\"设备\"\r\n              align=\"center\"\r\n              prop=\"a\"\r\n            />\r\n            <el-table-column\r\n              label=\"参数\"\r\n              align=\"center\"\r\n              prop=\"b\"\r\n            />\r\n            <el-table-column\r\n              label=\"数值\"\r\n              align=\"num\"\r\n              prop=\"c\"\r\n            />\r\n          </el-table>\r\n</template>\r\n<script>\r\nexport default {\r\n  data () {\r\n    return {\r\n      tableData: [\r\n        { a: '2222', b: '1', c: '2' },\r\n        { a: '111', b: '1', c: '2' },\r\n        { a: '111', b: '2', c: '3' },\r\n        { a: '111', b: '2', c: '3' },\r\n        { a: '111', b: '2', c: '3' },\r\n        { a: '2222', b: '1', c: '2' },\r\n        { a: '2222', b: '1', c: '2' },\r\n        { a: '111', b: '2222', c: '3333' },\r\n        { a: '111', b: '2222', c: '3333' }\r\n      ],\r\n      spanArr: []\r\n    }\r\n  },\r\n  methods: {\r\n    // groupBy 数组\r\n    groupBy (data, params) {\r\n      const groups = {}\r\n      data.forEach(v => {\r\n        const group = JSON.stringify(v[params])\r\n        groups[group] = groups[group] || []\r\n        groups[group].push(v)\r\n      })\r\n      return Object.values(groups)\r\n    },\r\n    // 计算 数据合并 索引\r\n    getSpanArr (data, params) {\r\n      // 接收重构数组\r\n      let arr = []\r\n\r\n      // 设置索引\r\n      let pos = 0\r\n\r\n      // 控制合并的数组\r\n      this.spanArr = []\r\n\r\n      // arr 处理\r\n      this.groupBy(data, params).map(v => (arr = arr.concat(v)))\r\n      \r\n      // this.tableData = arr\r\n      arr.map(res => {\r\n        data.shift()\r\n        data.push(res)\r\n      })\r\n\r\n      // spanArr 处理\r\n      const redata = arr.map(v => v[params])\r\n      redata.reduce((old, cur, i) => {\r\n        if (i === 0) {\r\n          this.spanArr.push(1)\r\n          pos = 0\r\n        } else {\r\n          if (cur === old) {\r\n            this.spanArr[pos] += 1\r\n            this.spanArr.push(0)\r\n          } else {\r\n            this.spanArr.push(1)\r\n            pos = i\r\n          }\r\n        }\r\n        return cur\r\n      }, {})\r\n    },\r\n\r\n    // 合并 tableData 数据\r\n    cellMerge ({ row, column, rowIndex, columnIndex }) {\r\n      if (columnIndex === 0) {\r\n        const _row = this.spanArr[rowIndex]\r\n        const _col = _row > 0 ? 1 : 0\r\n        return {\r\n          rowspan: _row,\r\n          colspan: _col\r\n        }\r\n      }\r\n    }\r\n  },\r\n  created () {\r\n    this.getSpanArr(this.tableData, 'a')\r\n  }\r\n}\r\n</script>\r\n\r\n```",
+      "data": {
+        "title": "Vue+Element-UI 中 el-table 动态合并单元格 :span-method 方法",
+        "date": "2021-01-18 17:26:02",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "vueelement-ui-zhong-el-table-dong-tai-he-bing-dan-yuan-ge-span-method-fang-fa"
+    },
+    {
+      "content": "```js\r\n/**\r\n *\r\n * author: jiabinbin\r\n * Email: 425605679@qq.com\r\n * Desc:\r\n * version: 1.0.0\r\n */\r\n\r\nimport permissionRoutes from './modules/permission-routes'\r\nimport NProgress from \"nprogress\";\r\nimport store from \"@/store\";\r\nimport router from \"@/router/index\";\r\n\r\n/**\r\n * 菜单数组转树\r\n * @param list\r\n * @returns {[]}\r\n */\r\nexport const listToTree = list => {\r\n  list.sort((a, b) => {\r\n    return a.sort - b.sort\r\n  })\r\n  const map = {}\r\n  let node\r\n  const tree = []\r\n\r\n  for (let i = 0; i < list.length; i++) {\r\n    map[list[i].name] = i;\r\n  }\r\n\r\n  for (let i = 0; i < list.length; i++) {\r\n    node = list[i];\r\n    if (node.parent) {\r\n      const children = list[map[node.parent]].children || []\r\n      list[map[node.parent]].children = [...children, node]\r\n    } else {\r\n      tree.push(node)\r\n    }\r\n  }\r\n  return tree\r\n}\r\n\r\n/**\r\n * 跟据后端返回的权限路由 树 生成vue-router所需要的路由树\r\n * 注: component这里不加载。因为生成的路由树，除了菜单使用外, 还需要在vue-router中做为动态路由使用\r\n * @param menuList\r\n * @returns {*}\r\n */\r\nexport const generatorUserMenuForTree = (menuList) => {\r\n  const userRoutes = menuList.map(menu => {\r\n    const {parent, icon, name, children = [], path, hidden = false, title} = menu\r\n    const i18nTitle = parent ? `${parent}.${name}` : `${name}` // name不一定为中文，如果用到i18n，则可以跟据name去做\r\n    // key是唯一的，防止重复，所以拼上父级菜单\r\n    const key = parent ? `${parent}-${name}` : `${name}`\r\n    // todo: 如果后端返回的父级菜单的路径为不带'/'号，则需要拼上 '/', 子菜单不需要，因为vue-router会自动跟据路径拼\r\n    const currentMenu = {\r\n      path,\r\n      name,\r\n      hidden,\r\n      parent,\r\n      meta: {\r\n        key: key,\r\n        title,\r\n        i18nTitle,\r\n        icon\r\n      },\r\n      children: children.length === 0 ? [] : generatorUserMenuForTree(children)\r\n    }\r\n    if (children.length <= 0) {\r\n      delete currentMenu.children\r\n    }\r\n    return currentMenu\r\n  })\r\n  return userRoutes\r\n}\r\n\r\n/**\r\n * 跟据后端返回的权限路由 数组 生成vue-router所需要的路由树\r\n * @param menuList\r\n * @returns {*}\r\n */\r\nexport const generatorUserMenuForList = menuList => {\r\n  // 如果后端返回的是纯数组的菜单（即：没有转换成菜单树结构的，要先转化成树结构）\r\n  const tree = listToTree(menuList)\r\n  const routes = generatorUserMenuForTree(tree)\r\n  // 最后添加404页面\r\n  routes.push({\r\n    path: '/:pathMatch(.*)*',\r\n    hidden: true,\r\n    redirect: '/error/404'\r\n  })\r\n  return routes\r\n}\r\n\r\n/**\r\n * 为所有路由添加component视图\r\n * @param routes\r\n */\r\nexport const setUserRouteComponent = routes => {\r\n  routes.forEach(r => {\r\n    r.component = !r.parent ? permissionRoutes.Layout : permissionRoutes[r.name]\r\n    if (r.children && r.children.length > 0) {\r\n      setUserRouteComponent(r.children)\r\n    }\r\n  })\r\n}\r\n\r\n/**\r\n * 用户权限路由中是否包含当前访问路由的路径，如有则可以添加\r\n * @param routes\r\n * @param path\r\n * @returns {boolean}\r\n */\r\nexport const findRouteForUserRoutes = (routes, path) => {\r\n  let hasRoute = false\r\n  const routeArr = path.split('/')\r\n  const routePath = routeArr[routeArr.length - 1]\r\n  for (let i = 0; i < routes.length; i++) {\r\n    const { path, children = [] } = routes[i]\r\n    if (path === routePath) {\r\n      hasRoute = true\r\n    } else if (children.length > 0) {\r\n      hasRoute = findRouteForUserRoutes(children, routePath)\r\n    }\r\n    if (hasRoute) {\r\n      break\r\n    }\r\n  }\r\n  return hasRoute\r\n}\r\n\r\nconst setDocumentTitle = title => {\r\n  // 如有i18n在这里修改\r\n  document.title = `pear-admin-ant-${title}`\r\n}\r\n/**\r\n * 权限控制\r\n * @param to\r\n * @param from\r\n * @param next\r\n * @returns {Promise<void>}\r\n */\r\nexport const permissionController = async (to, from, next) => {\r\n  //配置路由加载动画效果\r\n  NProgress.start();\r\n  const { meta: { title = '' } } = to\r\n  setDocumentTitle(title)\r\n  // 取消未完成的http请求\r\n  await store.dispatch('app/execCancelToken')\r\n  //这里也可以验证权限\r\n  // 前往页面不是登陆，且没有登陆的情况，统一重定向到登陆\r\n  if (!to.fullPath.includes('login') && !localStorage.getItem('pear_admin_ant_token')) {\r\n    next({path: '/login'})\r\n  } else {\r\n    // 如果基本路由中不包含页面前往的路径\r\n    if (!router.getRoutes().map(it => it.path).includes(to.fullPath)) {\r\n      console.log('========== 开始加载用户权限菜单 ==========')\r\n      // 后端返回的为一维数组菜单列表，如果返回的是树结构的菜单用 'user/addUserRouteForTree'\r\n      await store.dispatch('user/addUserRouteForArray')\r\n      // 用户权限菜单保存在vuex中。vuex是不允许在mutations外部改变state中的属性。所以这里简单的深拷贝一份，用于改变component属性的值\r\n      const userRoutes = JSON.parse(JSON.stringify(store.getters.menu))\r\n      // 如果url被改变\r\n      const hasRoute = findRouteForUserRoutes(userRoutes, to.fullPath)\r\n      if (hasRoute) {\r\n        // 为解决刷新页面后页面不显示将用户的权限菜单缓存于LocalStorage。而存放于storage中必然要将数组字符串化，那么对应的() => import('@/views/xx/xx')\r\n        // 异步加载会失效，所以在使用真正添加路由时再生成component的值\r\n        setUserRouteComponent(userRoutes)\r\n        userRoutes.forEach(r => {\r\n          router.addRoute(r)\r\n        })\r\n        next(to.fullPath)\r\n      } else {\r\n        next('/error/404')\r\n      }\r\n    } else {\r\n      next()\r\n    }\r\n  }\r\n}\r\n```",
+      "data": {
+        "title": "vue3.0 permission.js",
+        "date": "2020-12-30 13:13:35",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "vue30-permissionjs"
+    },
+    {
       "content": "```js\r\n/**\r\n * 格式化日期\r\n * @param {string | number | Date} value 指定日期\r\n * @param {string} format 格式化的规则\r\n * @example\r\n * ```js\r\n * formatDate();\r\n * formatDate(1603264465956);\r\n * formatDate(1603264465956, \"h:m:s\");\r\n * formatDate(1603264465956, \"Y年M月D日\");\r\n * ```\r\n */\r\nfunction formatDate(value = Date.now(), format = \"Y-M-D h:m:s\") {\r\n    const formatNumber = n => `0${n}`.slice(-2);\r\n    const date = new Date(value);\r\n    const formatList = [\"Y\", \"M\", \"D\", \"h\", \"m\", \"s\"];\r\n    const resultList = [];\r\n    resultList.push(date.getFullYear().toString());\r\n    resultList.push(formatNumber(date.getMonth() + 1));\r\n    resultList.push(formatNumber(date.getDate()));\r\n    resultList.push(formatNumber(date.getHours()));\r\n    resultList.push(formatNumber(date.getMinutes()));\r\n    resultList.push(formatNumber(date.getSeconds()));\r\n    for (let i = 0; i < resultList.length; i++) {\r\n        format = format.replace(formatList[i], resultList[i]);\r\n    }\r\n    return format;\r\n}\r\n\r\n\r\n/**\r\n * 获取指定日期时间戳\r\n * @param {number} time 毫秒数\r\n */\r\nexport function getDateFormat (time = Date.now()) {\r\n  if (!time) return ''\r\n  const date = new Date(time)\r\n  return `${date.toLocaleDateString()} ${date.toTimeString().slice(0, 8)}`\r\n}\r\n```",
       "data": {
         "title": "格式化日期",
@@ -2430,6 +2530,16 @@
     }
   ],
   "tags": [
+    {
+      "name": "editor",
+      "slug": "6yuyVZc0d",
+      "used": true
+    },
+    {
+      "name": "pdf",
+      "slug": "dzK0nJiVX",
+      "used": true
+    },
     {
       "name": "tree",
       "slug": "Y_4-qZHt4",
