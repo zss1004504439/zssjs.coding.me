@@ -1,6 +1,54 @@
 {
   "posts": [
     {
+      "content": "```html\r\n<!doctype html>\r\n<html lang=\"en\">\r\n\r\n<head>\r\n  <meta charset=\"UTF-8\">\r\n  <title>css 多行文字和序号顶部对齐</title>\r\n  <style>\r\n    .ul {\r\n      list-style-type: none;\r\n      overflow: hidden;\r\n    }\r\n\r\n    /* 加一个padding的目的是因为负的text-indent会把序号挤到标签外，如果父级设置了overflow:hidden;序号就会被隐藏掉，为了防止出现这种情况，所以加上，也为了以后不给自己留坑 */\r\n    .ul li {\r\n      text-indent: -1em;\r\n      padding-left: 1em;\r\n    }\r\n  </style>\r\n</head>\r\n\r\n<body>\r\n  方式1\r\n  <hr>\r\n  <ol>\r\n    <li>单行文本</li>\r\n    <li>多行文本多行文本多行文本多行文本多行文本多行文本</li>\r\n  </ol>\r\n  方式2\r\n  <hr>\r\n  <ul style=\"list-style-type: none;\">\r\n    <li style=\"text-indent:-1.5em; padding-left:1.5em;\">1、单行文本</li>\r\n    <li style=\"text-indent:-1.5em; padding-left:1.5em;\">2、多行文本多行文本多行文本多行文本多行文本多行文本</li>\r\n  </ul>\r\n  方式3\r\n  <hr>\r\n  <ul class=\"ul\">\r\n    <li>\r\n      1.大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多\r\n    </li>\r\n    <li>\r\n      2.大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多\r\n    </li>\r\n    <li>\r\n      3.大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多\r\n    </li>\r\n  </ul>\r\n</body>\r\n\r\n</html>\r\n```",
+      "data": {
+        "title": "css 多行文字和序号顶部对齐",
+        "date": "2021-03-12 18:22:01",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "css-duo-xing-wen-zi-he-xu-hao-ding-bu-dui-qi"
+    },
+    {
+      "content": "## mac `export`设置变量\r\n```json\r\n\"scripts\": {\r\n   \"start\": \"export NODE_ENV=development && nodemon -w src --exec \\\"babel-node src\\\"\",\r\n   \"build\": \"babel src --out-dir dist\",\r\n   \"run-build\": \"node dist\",\r\n }\r\n```\r\n## window `set`设置变量\r\n```json\r\n\"scripts\": {\r\n   \"start\": \"set NODE_ENV=development && nodemon -w src --exec \\\"babel-node src\\\"\",\r\n   \"build\": \"babel src --out-dir dist\",\r\n   \"run-build\": \"node dist\",\r\n }\r\n```",
+      "data": {
+        "title": "window和mac下设置NODE_ENV变量",
+        "date": "2021-03-10 09:45:52",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "window-he-mac-xia-she-zhi-node_env-bian-liang"
+    },
+    {
+      "content": "## 安装插件\r\neslint vetur prettier - code formatter\r\n### 配置 vscode settings.json\r\n```\r\n{\r\n  ...\r\n  \r\n    // 保存的时候格式化\r\n    \"editor.formatOnSave\": true,\r\n    \r\n    // 启用 eslint 格式化\r\n    \"eslint.format.enable\": true,\r\n  \r\n    // 采用 eslint 格式化\r\n    \"[vue]\": {\r\n        \"editor.defaultFormatter\": \"dbaeumer.vscode-eslint\"\r\n    },\r\n    \"[javascript]\": {\r\n        \"editor.defaultFormatter\": \"dbaeumer.vscode-eslint\"\r\n    },\r\n    \"[typescript]\": {\r\n        \"editor.defaultFormatter\": \"dbaeumer.vscode-eslint\"\r\n    }\r\n}\r\n```\r\n### 配置 .prettierrc\r\n```\r\n{\r\n  \"spaceBeforeFunctionParen\": true,\r\n  \"tabWidth\": 2,\r\n  \"useTabs\": false,\r\n  \"trailingComma\": \"none\",\r\n  \"eslintIntegration\": true,\r\n  \"singleQuote\": true,\r\n  \"semi\": false,\r\n  \"bracketSpacing\": true,\r\n  \"jsxBracketSameLine\": false,\r\n  \"arrowParens\": \"avoid\"\r\n}\r\n```\r\n",
+      "data": {
+        "title": "vscode 代码格式化 eslint+prettier+vetur",
+        "date": "2021-02-18 09:04:36",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "vscode-dai-ma-ge-shi-hua-eslintprettiervetur"
+    },
+    {
       "content": "```js\r\n<template>\r\n  <div class=\"editor\">\r\n    <TinymceEditor id=\"editor-tinymce\" ref=\"ZEditor\" v-model=\"myValue\" :init=\"completeSetting\" :disabled=\"disabled\" />\r\n  </div>\r\n</template>\r\n\r\n<script>\r\nimport tinymce from 'tinymce/tinymce'\r\nimport TinymceEditor from '@tinymce/tinymce-vue'\r\n// 样式\r\n// import 'tinymce/skins/content/default/content.min.css'\r\n// import 'tinymce/skins/ui/oxide/skin.min.css'\r\n// import 'tinymce/skins/ui/oxide/content.min.css'\r\n\r\n// 主题\r\nimport 'tinymce/themes/silver/theme'\r\nimport 'tinymce/icons/default/icons'\r\n\r\nimport 'tinymce/plugins/advlist'\r\nimport 'tinymce/plugins/anchor'\r\nimport 'tinymce/plugins/autolink'\r\nimport 'tinymce/plugins/autosave'\r\nimport 'tinymce/plugins/autoresize'\r\n\r\nimport 'tinymce/plugins/charmap'\r\nimport 'tinymce/plugins/code'\r\nimport 'tinymce/plugins/codesample'\r\nimport 'tinymce/plugins/colorpicker'\r\nimport 'tinymce/plugins/contextmenu'\r\nimport 'tinymce/plugins/directionality'\r\nimport 'tinymce/plugins/emoticons'\r\nimport 'tinymce/plugins/fullscreen' // 全屏插件\r\nimport 'tinymce/plugins/help'\r\nimport 'tinymce/plugins/hr'\r\n\r\nimport 'tinymce/plugins/image' // 图片插件\r\nimport 'tinymce/plugins/imagetools'\r\nimport 'tinymce/plugins/insertdatetime'\r\n\r\nimport 'tinymce/plugins/link' // 链接插件\r\nimport 'tinymce/plugins/lists'\r\nimport 'tinymce/plugins/media' // 媒体插件\r\nimport 'tinymce/plugins/noneditable'\r\nimport 'tinymce/plugins/nonbreaking'\r\nimport 'tinymce/plugins/quickbars' // 快速栏插件\r\n\r\nimport 'tinymce/plugins/table' // 表格插件\r\nimport 'tinymce/plugins/template'\r\nimport 'tinymce/plugins/textcolor'\r\nimport 'tinymce/plugins/textpattern'\r\nimport 'tinymce/plugins/wordcount'\r\nimport 'tinymce/plugins/searchreplace'\r\n\r\nimport 'tinymce/plugins/pagebreak'\r\nimport 'tinymce/plugins/paste'\r\nimport 'tinymce/plugins/preview'\r\nimport 'tinymce/plugins/print'\r\nimport 'tinymce/plugins/visualblocks'\r\nimport 'tinymce/plugins/visualchars'\r\n\r\nimport 'tinymce/plugins/importword'\r\nimport 'tinymce/plugins/indent2em'\r\nimport 'tinymce/plugins/formatpainter'\r\n\r\nexport default {\r\n  name: 'ZEditor',\r\n  components: {\r\n    TinymceEditor\r\n  },\r\n  props: {\r\n    value: {\r\n      type: String,\r\n      default: ''\r\n    },\r\n    setting: {\r\n      type: Object,\r\n      default: () => {}\r\n    },\r\n    disabled: {\r\n      type: Boolean,\r\n      default: false\r\n    }\r\n  },\r\n  data () {\r\n    return {\r\n      defaultSetting: {\r\n        language_url: '/admin_jzm/tinymce/langs/zh_CN.js',\r\n        language: 'zh_CN',\r\n        // theme: 'silver',\r\n        // theme_url: '/admin_jzm/tinymce/mytheme.js',\r\n        // skin: 'oxide',\r\n        skin_url: 'http://127.0.0.1:8001/admin_jzm/tinymce/skins/ui/oxide',\r\n        // skin_url: '/admin_jzm/tinymce/skins/ui/oxide',\r\n        min_height: 250,\r\n        max_height: 600,\r\n        selector: 'textarea',\r\n        plugins:\r\n          'print preview searchreplace autolink directionality visualblocks visualchars fullscreen image link media template code codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists wordcount imagetools textpattern help noneditable autosave indent2em autoresize formatpainter importword quickbars paste',\r\n\r\n        toolbar: `code undo redo restoredraft | cut copy paste pastetext | forecolor backcolor bold italic underline strikethrough link anchor | alignleft aligncenter alignright alignjustify outdent indent | \\\r\n        styleselect formatselect fontselect fontsizeselect | bullist numlist | blockquote subscript superscript removeformat | \\\r\n        table image media charmap hr pagebreak insertdatetime print preview | codesample fullscreen | indent2em lineheight formatpainter importword restoredraft`,\r\n        toolbar_sticky: false, // 粘性工具栏\r\n        quickbars_insert_toolbar: '', // quickimage quicktable\r\n        quickbars_selection_toolbar:\r\n          'removeformat | bold italic underline strikethrough | fontsizeselect forecolor backcolor',\r\n        branding: false, // 隐藏右下角技术支持\r\n        menubar: true, // 隐藏最上方menu\r\n        statusbar: false, // 隐藏编辑器底部的状态栏\r\n        convert_urls: false,\r\n        toolbar_mode: 'wrap', // sliding & wrap\r\n        // 字号\r\n        // fontsize_formats: '12px 14px 16px 18px 24px 36px 48px 56px 72px',\r\n        // 字体\r\n        font_formats:\r\n          '微软雅黑=Microsoft YaHei,Helvetica Neue,PingFang SC,sans-serif;苹果苹方=PingFang SC,Microsoft YaHei,sans-serif;宋体=simsun,serif;仿宋体=FangSong,serif;黑体=SimHei,sans-serif;Arial=arial,helvetica,sans-serif;Arial Black=arial black,avant garde;Book Antiqua=book antiqua,palatino;',\r\n        link_list: [{ title: '预置链接1', value: 'http://www.baidu.com' }],\r\n        image_list: [{ title: '预置图片1', value: 'https://www.baidu.com/img/bd_logo1.png' }],\r\n        // importcss_append: true, // 配合插件 importcss\r\n        // content_security_policy: \"script-src *;\", //内容安全策略\r\n        // extended_valid_elements: 'script[src]', // 扩展有效元素\r\n        // 为内容模板插件提供预置模板\r\n        templates: [\r\n          {\r\n            title: '模板文档',\r\n            description: '介绍文字',\r\n            content:\r\n              '<div class=\"mceTmpl\"><span class=\"cdate\">CDATE</span>，<span class=\"mdate\">MDATE</span>，我的内容</div>'\r\n          }\r\n        ],\r\n        insertdatetime_formats: ['%Y年%m月%d日', '%H点%M分%S秒', '%Y-%m-%d', '%H:%M:%S'],\r\n        paste_data_images: true, // 配合插件 paste 允许粘贴图像\r\n        autosave_ask_before_unload: true, // 当关闭或跳转URL时，弹出提示框提醒用户仍未保存变更内容。默认开启提示。\r\n        // images_upload_base_path: '/', // 给返回的相对路径指定它所相对的基本路径。\r\n        images_upload_handler: (blobInfo, success, failFun) => {\r\n          const img = 'data:image/jpeg;base64,' + blobInfo.base64()\r\n          success(img)\r\n        }\r\n      },\r\n      myValue: this.value\r\n    }\r\n  },\r\n  computed: {\r\n    completeSetting () {\r\n      return Object.assign(this.defaultSetting, this.setting)\r\n    }\r\n  },\r\n  watch: {\r\n    myValue (newValue) {\r\n      this.$emit('input', newValue)\r\n    },\r\n    value (newValue) {\r\n      this.myValue = newValue\r\n    }\r\n  },\r\n  mounted () {\r\n    // tinymce.init({})\r\n  },\r\n  beforeDestroy () {\r\n    tinymce.get('editor-tinymce').destroy()\r\n  }\r\n}\r\n</script>\r\n\r\n<style lang=\"less\" scoped>\r\n::v-deep .tox-tinymce {\r\n  border: 1px solid #dcdfe6;\r\n  border-radius: 4px;\r\n}\r\n</style>\r\n```",
       "data": {
         "title": "Tinymce demo",
