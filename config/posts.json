@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "content": "```bat\r\n:: 查看缓存地址\r\n:: yarn cache dir\r\n:: 清理缓存\r\nyarn cache clean\r\n:: 设置缓存地址\r\n:: yarn config set cache-folder E:\\cache\\yarn_cache\r\n\r\n:: 查看缓存地址\r\n@REM npm config get cache\r\n:: 清理缓存\r\n@REM npm cache clean --force\r\n:: 设置缓存地址\r\n@REM npm config set cache \"E:\\cache\\npm_cache\"\r\n:: 验证清理的有效性\r\n@REM npm cache verify\r\n```",
+      "data": {
+        "title": "yarn npm clean cache",
+        "date": "2021-03-15 09:41:36",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "yarn-npm-clean-cache"
+    },
+    {
       "content": "```html\r\n<!doctype html>\r\n<html lang=\"en\">\r\n\r\n<head>\r\n  <meta charset=\"UTF-8\">\r\n  <title>css 多行文字和序号顶部对齐</title>\r\n  <style>\r\n    .ul {\r\n      list-style-type: none;\r\n      overflow: hidden;\r\n    }\r\n\r\n    /* 加一个padding的目的是因为负的text-indent会把序号挤到标签外，如果父级设置了overflow:hidden;序号就会被隐藏掉，为了防止出现这种情况，所以加上，也为了以后不给自己留坑 */\r\n    .ul li {\r\n      text-indent: -1em;\r\n      padding-left: 1em;\r\n    }\r\n  </style>\r\n</head>\r\n\r\n<body>\r\n  方式1\r\n  <hr>\r\n  <ol>\r\n    <li>单行文本</li>\r\n    <li>多行文本多行文本多行文本多行文本多行文本多行文本</li>\r\n  </ol>\r\n  方式2\r\n  <hr>\r\n  <ul style=\"list-style-type: none;\">\r\n    <li style=\"text-indent:-1.5em; padding-left:1.5em;\">1、单行文本</li>\r\n    <li style=\"text-indent:-1.5em; padding-left:1.5em;\">2、多行文本多行文本多行文本多行文本多行文本多行文本</li>\r\n  </ul>\r\n  方式3\r\n  <hr>\r\n  <ul class=\"ul\">\r\n    <li>\r\n      1.大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多\r\n    </li>\r\n    <li>\r\n      2.大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多\r\n    </li>\r\n    <li>\r\n      3.大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多撒多无群的无群二无群大萨达撒多\r\n    </li>\r\n  </ul>\r\n</body>\r\n\r\n</html>\r\n```",
       "data": {
         "title": "css 多行文字和序号顶部对齐",
