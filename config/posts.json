@@ -1,6 +1,70 @@
 {
   "posts": [
     {
+      "content": "```js\r\nvar t = performance.timing\r\n// 页面加载的耗时\r\nvar pageloadtime = t.loadEventStart - t.navigationStart;\r\n// 域名解析的耗时\r\nvar dns = t.domainLookupEnd - t.domainLookupStart;\r\n// TCP连接的耗时\r\nvar tcp = t.connectEnd - t.connectStart;\r\n// 读取页面第一个字节之前的耗时\r\nvar ttfb = t.responseStart - t.navigationStart;\r\n```",
+      "data": {
+        "title": "前端(performance)精准获取页面启动加载时间",
+        "date": "2021-05-08 18:41:04",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "qian-duan-jing-zhun-huo-qu-ye-mian-qi-dong-jia-zai-shi-jian"
+    },
+    {
+      "content": "```js\r\nconst obj = { a:\"姓名\", b:18, c:\"内容\" }\r\nconst data = {}\r\nobj = { a: data.name, b: data.age, c: data.xx } = obj\r\nconsole.log(obj) // { a:\"姓名\", b:18, c:\"内容\" }\r\nconsole.log(data) // { name:\"姓名\", age:18, xx:\"内容\" }\r\n```",
+      "data": {
+        "title": "es6解构赋值变量名称的另一种用法",
+        "date": "2021-05-06 10:48:20",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "es6-jie-gou-fu-zhi-bian-liang-ming-cheng-de-ling-yi-chong-yong-fa"
+    },
+    {
+      "content": "```js\r\nif (isWin10IE) {\r\n    window.location.href = `microsoft-edge:${document.URL}`;\r\n}\r\n```",
+      "data": {
+        "title": "ie浏览器内唤起edge",
+        "date": "2021-04-28 14:23:41",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "ie-liu-lan-qi-nei-huan-qi-edge"
+    },
+    {
+      "content": "## 解决别名配置问题\r\n```json\r\n// tsconfig.json\r\n{\r\n    ...\r\n    \"extends\": \"./paths.json\"\r\n}\r\n```\r\n```json\r\n// paths.json\r\n{\r\n    \"compilerOptions\": {\r\n        \"baseUrl\": \"src\",\r\n        \"paths\": {\r\n            \"@/*\": [\"*\"]\r\n        }\r\n    }\r\n}\r\n```",
+      "data": {
+        "title": "create-react-app typescript模板",
+        "date": "2021-04-23 10:10:29",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "create-react-app-typescript-mo-ban"
+    },
+    {
       "content": "```html\r\n<template>\r\n  <div class=\"elevator\" :class=\"{'edit': isEdit}\" id=\"elevator\" ref=\"elevator\" v-show=\"sortList.length > 0\">\r\n    <div class=\"mask\" @click=\"onEdit\"></div>\r\n    <i class=\"ear bilifont bili-icon_youdaohang_xiaodianshitianxian\"></i>\r\n    <div class=\"list-box\">\r\n      <SlickList lockAxis=\"y\" v-model=\"sortList\" helperClass=\"slicksort-selected\" @input=\"onInput\">\r\n        <SlickItem class=\"item sortable\" :class=\"{'on': index === currentFloor && !isEdit}\" v-for=\"(item, index) in sortList\" :key=\"`nav-${index}`\" :index=\"index\" :disabled=\"!isEdit\" @click.native=\"moveTo(item.type)\" v-van-report:elevatorMoveto.click=\"item.type\">\r\n          {{ item.name }}\r\n        </SlickItem>\r\n      </SlickList>\r\n      <div class=\"item sort\" :class=\"{'on': isEdit}\" @click=\"onEdit\" v-van-report:sort.click><i class=\"bilifont bili-icon_youdaohang_paixu\"></i></div>\r\n      <div class=\"item back-top\" @click=\"scrollTo(0)\"><i class=\"bilifont bili-general_pullup_s\"></i></div>\r\n      <!-- <div class=\"item back-old\" @click=\"onSwitchLang\" v-html=\"$HomeLang['24']\"></div> -->\r\n    </div>\r\n    <div class=\"bg23\"></div>\r\n  </div>\r\n</template>\r\n\r\n<script>\r\nimport { SlickList, SlickItem } from 'vue-slicksort'\r\nimport { getElevatorSort, setElevatorSort } from 'g-public/apis/home'\r\nimport { Cantor, scrollTop, cookie, customReport } from 'g-public/js/utils'\r\nimport { mapState } from 'vuex'\r\n\r\nexport default {\r\n  components: {\r\n    SlickItem,\r\n    SlickList\r\n  },\r\n  props: {\r\n    config: {\r\n      type: Array,\r\n      default: () => {\r\n        return []\r\n      }\r\n    }\r\n  },\r\n  data() {\r\n    return {\r\n      sortList: [],\r\n      isEdit: false,\r\n      initSortList: [],\r\n      currentFloor: -1\r\n    }\r\n  },\r\n  computed: {\r\n    ...mapState(['recommendData']),\r\n    needOffset() {\r\n      return this.recommendData?.abtest?.group === 'b'\r\n    },\r\n    sortNumber(){\r\n      return this.config.length\r\n    }\r\n  },\r\n  methods: {\r\n    async getElevatorSortData() {\r\n      try {\r\n        const { data } = await getElevatorSort()\r\n        if(data.code === 0) {\r\n          const localSetting = window.localStorage.index_user_setting\r\n          const remoteSetting = data.data\r\n          if(localSetting !== JSON.stringify(remoteSetting)) {\r\n            window.localStorage.index_user_setting = JSON.stringify(remoteSetting)\r\n          }\r\n        }\r\n      } catch(err) {}\r\n\r\n      this.setInitSortList()\r\n    },\r\n    async setElevatorSortData(param) {\r\n      try {\r\n        await setElevatorSort(param)\r\n      } catch(err) {}\r\n    },\r\n    setInitSortList() {\r\n      this.initSortList = this.getSortData()\r\n      this.setSortList(this.initSortList)\r\n      this.$emit('on-change', this.initSortList)\r\n    },\r\n    getSortData(){\r\n      const setting = JSON.parse(window.localStorage.index_user_setting || \"{}\")\r\n\r\n      // 如果增减分区要先判断len 拿len去decode 否则返回本地排序\r\n      if(setting.len === this.sortNumber){\r\n        return Cantor.decode(setting.sort, this.sortNumber)\r\n      }else{\r\n        return this.defaultSort()\r\n      }\r\n    },\r\n    setSortList(sortData) {\r\n      let arr = []\r\n      for(let i = 0; i < sortData.length; i++) {\r\n        const id = sortData[i]\r\n        arr.push({\r\n          sort: id,\r\n          name: (this.config[id].navName || this.config[id].name),\r\n          type: this.config[id].type\r\n        })\r\n      }\r\n      this.sortList = arr\r\n    },\r\n    //默认排序\r\n    defaultSort(){\r\n      let arr = []\r\n      for(let i = 0; i < this.sortNumber; i++){\r\n        arr[i] = i\r\n      }\r\n      return arr\r\n    },\r\n    // 结果存到服务器\r\n    setNavDataToDB(arr) {\r\n      const setting = { sort: Cantor.encode(arr, this.sortNumber), len: this.sortNumber }\r\n      if(setting.sort.toString() === this.initSortList.toString()) return\r\n      this.setElevatorSortData({\r\n        settings: JSON.stringify(setting)\r\n      })\r\n    },\r\n    // 结果存到本地\r\n    setNavDataTolocalStorage(arr) {\r\n      const setting = {\r\n        sort: Cantor.encode(arr, this.sortNumber),\r\n        len: this.sortNumber\r\n      }\r\n      window.localStorage.index_user_setting = JSON.stringify(setting)\r\n    },\r\n    onEdit() {\r\n      this.isEdit = !this.isEdit\r\n    },\r\n    onInput(info) {\r\n      let arr = []\r\n      for(let i = 0; i < info.length; i++) {\r\n        arr.push(info[i].sort)\r\n      }\r\n\r\n      this.setNavDataTolocalStorage(arr)\r\n      // if(window.UserStatus && window.UserStatus.userInfo && window.UserStatus.userInfo.isLogin){\r\n        this.setNavDataToDB(arr)\r\n      // }\r\n\r\n      this.$emit('on-change', arr)\r\n    },\r\n    scrollHandle() {\r\n      const elevatorDom = document.querySelector('#elevator')\r\n      const scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop\r\n      const minTop = document.querySelector('.first-screen').offsetTop + (this.needOffset ? 106 : 0)\r\n      const centerTop = (document.documentElement.clientHeight - (elevatorDom.offsetHeight + 70)) / 2\r\n      //定位\r\n      const t = scrollTop < minTop ? minTop - scrollTop : (centerTop < 0 ? 10 : centerTop)\r\n      elevatorDom.style.top = `${t}px`\r\n\r\n      if(scrollTop < 700) {\r\n        this.currentFloor = -1\r\n        return\r\n      }\r\n\r\n      for(let i = 0; i < this.sortList.length; i++) {\r\n        const el = document.querySelector(`#bili_${this.sortList[i]['type']}`)\r\n        const top = el.offsetTop\r\n        const height = el.offsetHeight\r\n        const dest = scrollTop - (height/2)\r\n        if(top > dest) {\r\n          this.currentFloor = i\r\n          break\r\n        }\r\n      }\r\n    },\r\n    moveTo(type) {\r\n      const el = document.querySelector(`#bili_${type}`)\r\n      window.scroll(0, el.offsetTop)\r\n    },\r\n    scrollTo(val) {\r\n      window.scroll(0, val)\r\n    },\r\n  },\r\n  mounted() {\r\n    this.getElevatorSortData()\r\n\r\n    this.scrollHandle()\r\n    window.addEventListener('scroll', e => {\r\n      this.scrollHandle()\r\n    })\r\n    window.addEventListener('resize', () => this.scrollHandle())\r\n  }\r\n}\r\n</script>\r\n\r\n<style lang=\"less\">\r\n.elevator {\r\n  position: fixed;\r\n  left: calc(50% + 3px);\r\n  top: 10px;\r\n  margin-left: 825px;\r\n  z-index: 10;\r\n\r\n  .list-box {\r\n    padding-top: 6px;\r\n    position: relative;\r\n    background: #FFFFFF;\r\n    border: 1px solid #e7e7e7;\r\n    border-top-left-radius: 10px;\r\n    border-top-right-radius: 10px;\r\n    z-index: 2;\r\n    .item {\r\n      width: 54px;\r\n      height: 24px;\r\n      line-height: 24px;\r\n      text-align: center;\r\n      cursor: pointer;\r\n      transition: all .2s;\r\n      user-select:none;\r\n      background: #FFFFFF;\r\n      &.sort{\r\n        height: 32px;\r\n        line-height: 32px;\r\n        position: relative;\r\n        border-top: 1px solid #e7e7e7;\r\n        margin-top: 5px;\r\n      }\r\n      &.back-top {\r\n        position: absolute;\r\n        left: -1px;\r\n        bottom: -32px;\r\n        width: 56px;\r\n        line-height: 30px;\r\n        height: 32px;\r\n        border: 1px solid #e7e7e7;\r\n        border-bottom-left-radius: 10px;\r\n        border-bottom-right-radius: 10px;\r\n        .bilifont {\r\n          font-size: 26px;\r\n        }\r\n      }\r\n      &.back-old {\r\n        position: absolute;\r\n        width: 56px;\r\n        height: 42px;\r\n        line-height: 16px;\r\n        left: -1px;\r\n        bottom: -82px;\r\n        border-radius: 10px;\r\n        border: 1px solid #e7e7e7;\r\n        display: flex;\r\n        justify-content: center;\r\n        align-items: center;\r\n      }\r\n      .bilifont {\r\n        color: #999;\r\n      }\r\n      &:hover, &.on {\r\n        background-color: #00a1d6;\r\n        color: #fff;\r\n        .bilifont {\r\n          color: #fff;\r\n        }\r\n      }\r\n    }\r\n  }\r\n  .ear {\r\n    position: absolute;\r\n    top: -10px;\r\n    font-size: 12px;\r\n    left: 3px;\r\n    z-index: 2;\r\n  }\r\n  .bg23 {\r\n    display: none;\r\n    position: absolute;\r\n    width: 130px;\r\n    height: 105%;\r\n    top: -20px;\r\n    right: -15px;\r\n    background-color:rgba(255,255,255, .8);\r\n    padding: 40px;\r\n    box-sizing: content-box;\r\n    border-radius: 2px;\r\n    background-image: url('https://s1.hdslb.com/bfs/static/jinkela/home/asserts/tab2233.png');\r\n    background-repeat: no-repeat;\r\n    background-position: 16px 20px;\r\n  }\r\n\r\n  &.edit{\r\n    z-index: 1000;\r\n    .mask {\r\n      position: fixed;\r\n      left: 0;\r\n      top: 0;\r\n      right: 0;\r\n      bottom: 0;\r\n      width: 100%;\r\n      height: 100%;\r\n      background-color: rgba(0, 0, 0, .5);\r\n    }\r\n    .bg23 {\r\n      display: block;\r\n    }\r\n  }\r\n}\r\n.slicksort-selected {\r\n  text-align: center;\r\n  line-height: 28px;\r\n  background-color: #00a1d6;\r\n  color: #fff;\r\n  pointer-events:stroke !important;\r\n  z-index: 1001;\r\n  .bilifont {\r\n    color: #fff;\r\n  }\r\n}\r\n</style>\r\n\r\n\r\n```",
       "data": {
         "title": "vuejs elevator 楼层电梯",
