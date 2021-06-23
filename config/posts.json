@@ -1,11 +1,47 @@
 {
   "posts": [
     {
+      "content": "1. 整理更合适的接口就是一个很好的意义，如果你的前端比较重，那前端就必须保持干净，别让不合理的接口污染代码\r\n2. 多接口调用合一的情况，BFF 与后端服务的通信速度远快于浏览器走网络\r\n3. SSR\r\n4. 公网是很慢的，像是把数组变成一个 length，能很大节省传输量\r\n---\r\n1.后端服务要求稳定，高性能，作为核心业务，常用语言有 java，bff 作为胶水层，需要灵活，开发速度快，能够快速响应业务变化，常用语言有 node，php 2.bff 作为聚合接口数据层，可以清洗后端服务提供的数据，针对性的提供更合理的数据结构给前端，减小用户流量消耗，加快网络速度 3.减轻前端对数据的繁杂处理，让前端更纯粹的渲染页面\r\n---\r\nhttps://www.v2ex.com/t/784162#reply21",
+      "data": {
+        "title": "bff",
+        "date": "2021-06-23 18:01:17",
+        "tags": [
+          "BFF"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "bff"
+    },
+    {
+      "content": "```js\r\n      console.log('🚀  this', this)\r\n      Object.assign(this.$data, this.$options.data.call(this))\r\n      console.log('🚀  this', this)\r\n```",
+      "data": {
+        "title": "$options.data 重置data",
+        "date": "2021-06-22 09:44:42",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "dollaroptionsdata-chong-zhi-data"
+    },
+    {
       "content": "```js\r\n<template>\r\n  <div class=\"tableBox\">\r\n    <div class=\"buttons\">\r\n      <a-button @click=\"onFilter\">取消过滤</a-button>\r\n      <a-button\r\n        v-for=\"item in filterArr\"\r\n        :key=\"item.value\"\r\n        @click=\"onFilter(item)\"\r\n        >{{ item.value }}</a-button\r\n      >\r\n    </div>\r\n    <a-table\r\n      :rowKey=\"(record, idx) => idx\"\r\n      :columns=\"columns\"\r\n      :data-source=\"tableData\"\r\n      :pagination=\"false\"\r\n      bordered\r\n    >\r\n    </a-table>\r\n  </div>\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n  data() {\r\n    return {\r\n      columns: [\r\n        {\r\n          title: '',\r\n          dataIndex: 'title',\r\n          width: 120,\r\n          customRender: (text, row) => {\r\n            return {\r\n              children: `${text}`,\r\n              attrs: {\r\n                rowSpan: row.titleRowSpan\r\n              }\r\n            };\r\n          }\r\n        },\r\n        {\r\n          title: '部门',\r\n          dataIndex: 'department',\r\n          width: 120,\r\n          customRender: (text, row, index) => {\r\n            return {\r\n              children: `${text}`,\r\n              attrs: {\r\n                rowSpan: row.departmentRowSpan\r\n              }\r\n            };\r\n          }\r\n        },\r\n        {\r\n          title: '代码类型',\r\n          dataIndex: 'codeType',\r\n          width: 120\r\n        },\r\n        {\r\n          title: '总数',\r\n          dataIndex: 'totalCount',\r\n          width: 120\r\n        },\r\n        {\r\n          title: '修复',\r\n          dataIndex: 'fixCount',\r\n          width: 120\r\n        },\r\n        {\r\n          title: '未修复',\r\n          dataIndex: 'notFixedCount',\r\n          width: 120\r\n        },\r\n        {\r\n          title: '今日新增',\r\n          dataIndex: 'todayAdd',\r\n          width: 120\r\n        },\r\n        {\r\n          title: 'Bug类型',\r\n          dataIndex: 'bugType',\r\n          width: 120,\r\n          customRender: (text, row, index) => {\r\n            return {\r\n              children: `${text}`,\r\n              attrs: {\r\n                rowSpan: row.bugTypeRowSpan\r\n              }\r\n            };\r\n          }\r\n        }\r\n      ],\r\n      tableData: [\r\n        {\r\n          fixCount: 0,\r\n          id: 0,\r\n          codeType: '新代码',\r\n          bugType: 'ui展示问题',\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 0,\r\n          title: 'bug总览',\r\n          department: '开发一部'\r\n        },\r\n        {\r\n          fixCount: 0,\r\n          id: 1,\r\n          codeType: '老代码',\r\n          bugType: 'ui展示问题',\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 0,\r\n          title: 'bug总览',\r\n          department: '开发一部'\r\n        },\r\n\r\n        {\r\n          fixCount: 0,\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 0,\r\n          bugType: 'ui展示问题',\r\n          codeType: 'ui展示问题总计',\r\n          title: 'bug总览',\r\n          department: '开发一部'\r\n        },\r\n\r\n        {\r\n          fixCount: 0,\r\n          id: 0,\r\n          codeType: '新代码',\r\n          bugType: '功能性bug',\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 0,\r\n          title: 'bug总览',\r\n          department: '开发一部'\r\n        },\r\n        {\r\n          fixCount: 0,\r\n          id: 1,\r\n          codeType: '老代码',\r\n          bugType: '功能性bug',\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 0,\r\n          title: 'bug总览',\r\n          department: '开发一部'\r\n        },\r\n\r\n        {\r\n          fixCount: 0,\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 0,\r\n          bugType: '功能性bug',\r\n          codeType: '功能性bug总计',\r\n          title: 'bug总览',\r\n          department: '开发一部'\r\n        },\r\n\r\n        {\r\n          fixCount: 0,\r\n          id: 0,\r\n          codeType: '新代码',\r\n          bugType: '前端bug',\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 0,\r\n          title: 'bug总览',\r\n          department: '开发一部'\r\n        },\r\n        {\r\n          fixCount: 0,\r\n          id: 1,\r\n          codeType: '老代码',\r\n          bugType: '前端bug',\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 0,\r\n          title: 'bug总览',\r\n          department: '开发一部'\r\n        },\r\n\r\n        {\r\n          fixCount: 0,\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 3,\r\n          bugType: '前端bug',\r\n          codeType: '前端bug总计',\r\n          title: 'bug总览',\r\n          department: '开发一部'\r\n        },\r\n\r\n        {\r\n          fixCount: 0,\r\n          id: 0,\r\n          codeType: '新代码',\r\n          bugType: '后端bug',\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 0,\r\n          title: 'bug总览',\r\n          department: '开发一部'\r\n        },\r\n        {\r\n          fixCount: 0,\r\n          id: 1,\r\n          codeType: '老代码',\r\n          bugType: '后端bug',\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 2,\r\n          title: 'bug总览',\r\n          department: '开发一部'\r\n        },\r\n\r\n        {\r\n          fixCount: 0,\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 5,\r\n          bugType: '后端bug',\r\n          codeType: '后端bug总计',\r\n          title: 'bug总览',\r\n          department: '开发一部'\r\n        },\r\n\r\n        {\r\n          fixCount: 0,\r\n          id: 0,\r\n          codeType: '新代码',\r\n          bugType: '非bug',\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 0,\r\n          title: 'bug总览',\r\n          department: '开发一部'\r\n        },\r\n        {\r\n          fixCount: 0,\r\n          id: 1,\r\n          codeType: '老代码',\r\n          bugType: '非bug',\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 0,\r\n          title: 'bug总览',\r\n          department: '开发一部'\r\n        },\r\n\r\n        {\r\n          fixCount: 1,\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 5,\r\n          bugType: '非bug',\r\n          codeType: '非bug总计',\r\n          title: 'bug总览',\r\n          department: '开发一部'\r\n        },\r\n        {\r\n          fixCount: 0,\r\n          id: 0,\r\n          codeType: '新代码',\r\n          bugType: 'ui展示问题',\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 0,\r\n          title: 'bug总览',\r\n          department: '开发二部'\r\n        },\r\n        {\r\n          fixCount: 0,\r\n          id: 1,\r\n          codeType: '老代码',\r\n          bugType: 'ui展示问题',\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 0,\r\n          title: 'bug总览',\r\n          department: '开发二部'\r\n        },\r\n\r\n        {\r\n          fixCount: 0,\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 0,\r\n          bugType: 'ui展示问题',\r\n          codeType: 'ui展示问题总计',\r\n          title: 'bug总览',\r\n          department: '开发二部'\r\n        },\r\n\r\n        {\r\n          fixCount: 0,\r\n          id: 0,\r\n          codeType: '新代码',\r\n          bugType: '功能性bug',\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 0,\r\n          title: 'bug总览',\r\n          department: '开发二部'\r\n        },\r\n        {\r\n          fixCount: 0,\r\n          id: 1,\r\n          codeType: '老代码',\r\n          bugType: '功能性bug',\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 0,\r\n          title: 'bug总览',\r\n          department: '开发二部'\r\n        },\r\n\r\n        {\r\n          fixCount: 0,\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 0,\r\n          bugType: '功能性bug',\r\n          codeType: '功能性bug总计',\r\n          title: 'bug总览',\r\n          department: '开发二部'\r\n        },\r\n\r\n        {\r\n          fixCount: 0,\r\n          id: 0,\r\n          codeType: '新代码',\r\n          bugType: '前端bug',\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 0,\r\n          title: 'bug总览',\r\n          department: '开发二部'\r\n        },\r\n        {\r\n          fixCount: 0,\r\n          id: 1,\r\n          codeType: '老代码',\r\n          bugType: '前端bug',\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 0,\r\n          title: 'bug总览',\r\n          department: '开发二部'\r\n        },\r\n\r\n        {\r\n          fixCount: 0,\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 3,\r\n          bugType: '前端bug',\r\n          codeType: '前端bug总计',\r\n          title: 'bug总览',\r\n          department: '开发二部'\r\n        },\r\n\r\n        {\r\n          fixCount: 0,\r\n          id: 0,\r\n          codeType: '新代码',\r\n          bugType: '后端bug',\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 0,\r\n          title: 'bug总览',\r\n          department: '开发二部'\r\n        },\r\n        {\r\n          fixCount: 0,\r\n          id: 1,\r\n          codeType: '老代码',\r\n          bugType: '后端bug',\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 2,\r\n          title: 'bug总览',\r\n          department: '开发二部'\r\n        },\r\n\r\n        {\r\n          fixCount: 0,\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 5,\r\n          bugType: '后端bug',\r\n          codeType: '后端bug总计',\r\n          title: 'bug总览',\r\n          department: '开发二部'\r\n        },\r\n\r\n        {\r\n          fixCount: 0,\r\n          id: 0,\r\n          codeType: '新代码',\r\n          bugType: '非bug',\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 0,\r\n          title: 'bug总览',\r\n          department: '开发二部'\r\n        },\r\n        {\r\n          fixCount: 0,\r\n          id: 1,\r\n          codeType: '老代码',\r\n          bugType: '非bug',\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 0,\r\n          title: 'bug总览',\r\n          department: '开发二部'\r\n        },\r\n\r\n        {\r\n          fixCount: 1,\r\n          notFixedCount: 0,\r\n          todayAdd: 0,\r\n          totalCount: 5,\r\n          bugType: '非bug',\r\n          codeType: '非bug总计',\r\n          title: 'bug总览',\r\n          department: '开发二部'\r\n        }\r\n      ]\r\n    };\r\n  },\r\n  methods: {\r\n    //  合并单元格\r\n    combineRow(key) {\r\n      const tableData = this.tableData;\r\n      for (var i = 0; i < tableData.length; i++) {\r\n        const item = tableData[i];\r\n        let count = 1;\r\n        for (let j = i + 1; j < tableData.length; j++) {\r\n          // 如果是同一个值，往后递增\r\n          if (item[key] === tableData[j][key]) {\r\n            count++;\r\n            // 往后相同的值都设为空单元格\r\n            tableData[j][`${key}RowSpan`] = 0;\r\n            // 只有同值第一个才设置合并的单元格数\r\n            item[`${key}RowSpan`] = count;\r\n            // 所有都是为同一个值的情况\r\n            // 如果到了尾部，\r\n            if (j === tableData.length - 1) {\r\n              return;\r\n            }\r\n          } else {\r\n            // 指针跳转到下一个，从下一排开始\r\n            i = j - 1;\r\n            count = 1;\r\n            tableData[j][`${key}RowSpan`] = 0;\r\n            break;\r\n          }\r\n        }\r\n        console.log(i);\r\n      }\r\n      this.tableData = tableData;\r\n    },\r\n    // 过滤组\r\n    filterGroup(targets) {\r\n      const res = this.tableData.reduce((obj, cur) => {\r\n        for (let i of targets) {\r\n          const item = { key: i, value: cur[i] };\r\n          if (!obj[item.value]) {\r\n            obj[item.value] = item;\r\n          }\r\n        }\r\n        return obj;\r\n      }, {});\r\n      return Object.values(res);\r\n    },\r\n    onFilter(params) {\r\n      this.tableData = JSON.parse(JSON.stringify(this.originTableData));\r\n      if (!params) {\r\n        return;\r\n      }\r\n      const { key, value } = params;\r\n      this.tableData = this.tableData.filter((item) => item[key] === value);\r\n      this.initCombineRow();\r\n    },\r\n    initCombineRow() {\r\n      this.combineRow('title');\r\n      this.combineRow('department');\r\n      this.combineRow('bugType');\r\n    }\r\n  },\r\n  created() {\r\n    this.initCombineRow();\r\n    this.originTableData = JSON.parse(JSON.stringify(this.tableData));\r\n    this.filterArr = this.filterGroup(['department', 'bugType']);\r\n  }\r\n};\r\n</script>\r\n\r\n<style lang=\"less\" scoped>\r\n.tableBox {\r\n  width: 80vw;\r\n  margin: 0 auto;\r\n  .buttons {\r\n    margin: 10px 0;\r\n  }\r\n}\r\n/deep/.ant-table-bordered .ant-table-thead > tr > th,\r\n/deep/.ant-table-bordered .ant-table-tbody > tr > td {\r\n  padding: 2px;\r\n  text-align: center;\r\n}\r\n</style>\r\n```",
       "data": {
         "title": "表格合并",
         "date": "2021-06-16 17:26:54",
-        "tags": [],
+        "tags": [
+          "表格合并"
+        ],
         "published": true,
         "hideInList": false,
         "feature": null,
@@ -21,7 +57,9 @@
       "data": {
         "title": "树形数据 查找指定节点的父节点",
         "date": "2021-06-09 10:19:23",
-        "tags": [],
+        "tags": [
+          "tree-data"
+        ],
         "published": true,
         "hideInList": false,
         "feature": null,
@@ -37,7 +75,9 @@
       "data": {
         "title": "canvas 线条动画",
         "date": "2021-06-07 12:03:02",
-        "tags": [],
+        "tags": [
+          "canvas"
+        ],
         "published": true,
         "hideInList": false,
         "feature": null,
@@ -49,11 +89,13 @@
       "fileName": "canvas-xian-tiao-dong-hua"
     },
     {
-      "content": "## \r\n```js\r\n\"taxAdmin\".split(/(?=[A-Z])/) // [\"tax\", \"Admin\"]\r\n```",
+      "content": "## 大写字母分割字符串 \r\n```js\r\n\"taxAdmin\".split(/(?=[A-Z])/) // [\"tax\", \"Admin\"]\r\n```",
       "data": {
         "title": "正则",
         "date": "2021-06-04 11:12:54",
-        "tags": [],
+        "tags": [
+          "正则"
+        ],
         "published": true,
         "hideInList": false,
         "feature": null,
@@ -565,7 +607,7 @@
       "fileName": "fang-dou-jie-liu"
     },
     {
-      "content": "```js\r\nbeforeCreate  ->inject -> Props ->  Methods ->  Data -> Computed -> Watch ->provide-> created\r\n```",
+      "content": "```js\r\nbeforeCreate  ->inject -> Props ->  Methods ->  Data -> Computed -> Watch ->provide-> created\r\n```\r\n```js\r\n      console.log('🚀  this', this)\r\n      Object.assign(this.$data, this.$options.data.call(this))\r\n      console.log('🚀  this', this)\r\n```",
       "data": {
         "title": "vue组件 props、data 初始化的执行顺序",
         "date": "2020-11-16 13:33:17",
@@ -2850,6 +2892,26 @@
     }
   ],
   "tags": [
+    {
+      "name": "正则",
+      "slug": "-BWRXNCKp",
+      "used": true
+    },
+    {
+      "name": "tree-data",
+      "slug": "D9gg5gsxz",
+      "used": true
+    },
+    {
+      "name": "表格合并",
+      "slug": "X0WqTo9k-",
+      "used": true
+    },
+    {
+      "name": "BFF",
+      "slug": "5-UnsOMGv",
+      "used": true
+    },
     {
       "name": "editor",
       "slug": "6yuyVZc0d",

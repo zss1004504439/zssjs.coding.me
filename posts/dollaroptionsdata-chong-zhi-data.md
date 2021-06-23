@@ -1,15 +1,12 @@
 ---
-title: 'vue组件 props、data 初始化的执行顺序'
-date: 2020-11-16 13:33:17
+title: '$options.data 重置data'
+date: 2021-06-22 09:44:42
 tags: []
 published: true
 hideInList: false
 feature: 
 isTop: false
 ---
-```js
-beforeCreate  ->inject -> Props ->  Methods ->  Data -> Computed -> Watch ->provide-> created
-```
 ```js
       console.log('🚀  this', this)
       Object.assign(this.$data, this.$options.data.call(this))
