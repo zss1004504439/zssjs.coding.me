@@ -1,6 +1,102 @@
 {
   "posts": [
     {
+      "content": "```js\r\nimport Vuex, { createLogger } from 'vuex'\r\nconst debug = process.env.NODE_ENV !== 'production'\r\nexport default new Vuex.Store({\r\n    // ...\r\n    plugins: debug ? [createLogger()] : []\r\n})\r\n```",
+      "data": {
+        "title": "vuex createLogger",
+        "date": "2021-06-30 14:02:26",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "vuex-createlogger"
+    },
+    {
+      "content": "```js\r\n// hoc.js\r\nexport default function EnhanceWrapper (WrappedComponent) {\r\n  return {\r\n    mounted () {\r\n      console.log('I have already mounted')\r\n    },\r\n    props: WrappedComponent.props,\r\n    render (h) {\r\n      const slots = Object.keys(this.$slots)\r\n        .reduce((arr, key) => arr.concat(this.$slots[key]), [])\r\n        .map(vnode => {\r\n          vnode.context = this._self\r\n          return vnode\r\n        })\r\n\r\n      return h(WrappedComponent, {\r\n        on: this.$listeners,\r\n        props: this.$props,\r\n        // 透传 scopedSlots\r\n        scopedSlots: this.$scopedSlots,\r\n        attrs: this.$attrs\r\n      }, slots)\r\n    }\r\n  }\r\n}\r\n\r\n// 使用方式\r\nimport hoc from 'hoc.js'\r\nimport ElInput from 'Element-ui'\r\nconst HInput = hoc(ElInput)\r\n components: {\r\n   HInput\r\n }\r\n```",
+      "data": {
+        "title": "Vue2 高阶组件 HOC",
+        "date": "2021-06-30 11:21:47",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "vue2-gao-jie-zu-jian-hoc"
+    },
+    {
+      "content": "```js\r\nvar Vue = $0.__vue__.$root.constructor\r\nwhile(Vue.super) {Vue = Vue.super}\r\nVue.config.devtools = true\r\nwindow.__VUE_DEVTOOLS_GLOBAL_HOOK__.Vue = Vue\r\n```\r\n## \r\n```\r\n重新开启console\r\n```\r\n## 线上线下 查看 vuex数据\r\n```js\r\n$0.__vue__.$store._vm._data\r\n```\r\n## react\r\n```\r\n$0.__react\r\n```",
+      "data": {
+        "title": "Vue 开启线上调试 ",
+        "date": "2021-06-30 11:20:56",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "vue-kai-qi-xian-shang-diao-shi"
+    },
+    {
+      "content": "https://github.com/toddbluhm/env-cmd\r\n```json\r\n\"scripts\": {\r\n    \"start\": \"react-scripts start\",\r\n    \"start:staging\": \"env-cmd -f .env.staging react-scripts start\",\r\n    \"start:prod\": \"env-cmd -f .env.production react-scripts start\",\r\n    \"build\": \"react-scripts build\",\r\n    \"build:staging\": \"env-cmd -f .env.staging react-scripts build\",\r\n    \"build:prod\": \"env-cmd -f .env.production react-scripts build\",\r\n    \"test\": \"react-scripts test\",\r\n    \"eject\": \"react-scripts eject\"\r\n}\r\n```\r\nhttps://zhuanlan.zhihu.com/p/362418612 ",
+      "data": {
+        "title": "React .env ",
+        "date": "2021-06-30 09:34:29",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "react-env"
+    },
+    {
+      "content": "```html\r\n<!DOCTYPE html>\r\n<html>\r\n<head>\r\n  <meta charset=\"UTF-8\">\r\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n  <title>公众号：前端学不动</title>\r\n  <style>\r\n    * {\r\n      padding: 0;\r\n      margin: 0;\r\n    }\r\n    html, body { height: 100% }\r\n    body {\r\n      background: black;\r\n      display: flex;\r\n      align-items: center;\r\n      justify-content: center\r\n    }\r\n    .ul {\r\n      position: relative;\r\n      width: 100px;\r\n      height: 50px;\r\n      padding: 10px;\r\n      list-style: none;\r\n      overflow: hidden\r\n    }\r\n    .ul:first-of-type {\r\n      padding-bottom: 0\r\n    }\r\n    .ul:last-of-type {\r\n      padding-top: 0;\r\n      /* margin-top: -2px; */\r\n      /* animation: container-move .1s 1.2s forwards */\r\n    }\r\n\r\n    .harmony {\r\n      position: absolute;\r\n      top: 10px;\r\n      left: 10px;\r\n      width: 70px;\r\n      height: 70px;\r\n      border: 15px solid white;\r\n      border-radius: 50%;\r\n      transform: translateY(50%);\r\n      box-shadow: 0 0 6px white, inset 0 0 6px white;\r\n      animation: move 1.2s forwards\r\n    }\r\n    .ul:last-of-type > .harmony {\r\n      top: auto;\r\n      bottom: 10px;\r\n      transform: translateY(-50%);\r\n      filter: url(#blur)\r\n    }\r\n\r\n    svg {\r\n      width: 0;\r\n      height: 0\r\n    }\r\n\r\n    @keyframes move {\r\n      to { transform: none }\r\n    }\r\n\r\n    /* @keyframes container-move {\r\n      to { margin-top: 0 }\r\n    } */\r\n  </style>\r\n</head>\r\n<body>\r\n  <div class=\"container\">\r\n    <ul class=\"ul\">\r\n      <li class=\"harmony\"></li>\r\n    </ul>\r\n    <ul class=\"ul\">\r\n      <li class=\"harmony\"></li>\r\n    </ul>\r\n  </div>\r\n\r\n  <svg>\r\n    <filter id=\"blur\">\r\n      <feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"0 6\"/>\r\n    </filter>\r\n  </svg>\r\n\r\n  <script>\r\n    const filter = document.querySelector('feGaussianBlur')\r\n    \r\n    const clearFilter = () => {\r\n      const value = parseFloat(filter.getAttribute('stdDeviation').split(' ')[1]) - 0.06\r\n      \r\n      if (value > 0) {\r\n        filter.setAttribute('stdDeviation', `0 ${value}`)\r\n        requestAnimationFrame(clearFilter)\r\n      } else {\r\n        return\r\n      }\r\n    }\r\n\r\n    setTimeout(clearFilter, 1200)\r\n  </script>\r\n</body>\r\n</html>\r\n\r\n```",
+      "data": {
+        "title": "HarmonyOS gif",
+        "date": "2021-06-29 16:53:46",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "harmonyos-gif"
+    },
+    {
+      "content": "## shims-axios.d.ts\r\n```js\r\nimport { AxiosInstance, AxiosRequestConfig, AxiosPromise } from \"axios\"\r\n/**\r\n * 自定义扩展axios模块\r\n * @author 何小玍。\r\n */\r\ndeclare module \"axios\" {\r\n  export interface AxiosRequestConfig {\r\n    /**\r\n     * @description 设置为true，则会在请求过程中显示loading动画，直到请求结束才消失\r\n     */\r\n    loading?: boolean\r\n    isDialog?: boolean\r\n  }\r\n  export interface AxiosInstance {\r\n    <T = any>(config: AxiosRequestConfig): Promise<T>\r\n    request<T = any>(config: AxiosRequestConfig): Promise<T>\r\n    get<T = any>(url: string, config?: AxiosRequestConfig): Promise<T>\r\n    delete<T = any>(url: string, config?: AxiosRequestConfig): Promise<T>\r\n    head<T = any>(url: string, config?: AxiosRequestConfig): Promise<T>\r\n    post<T = any>(\r\n      url: string,\r\n      data?: any,\r\n      config?: AxiosRequestConfig\r\n    ): Promise<T>\r\n    put<T = any>(\r\n      url: string,\r\n      data?: any,\r\n      config?: AxiosRequestConfig\r\n    ): Promise<T>\r\n    patch<T = any>(\r\n      url: string,\r\n      data?: any,\r\n      config?: AxiosRequestConfig\r\n    ): Promise<T>\r\n  }\r\n}\r\n```\r\n## request.ts\r\n```js\r\n/**\r\n * @description [ axios 请求封装]\r\n */\r\n// import store from \"@/store\";\r\nimport axios, { AxiosResponse, AxiosRequestConfig } from \"axios\";\r\n// import { Message, Modal } from 'view-design' // UI组件库\r\nimport { Dialog, Toast } from \"vant\";\r\nimport router from \"@/router\";\r\n// 根据环境不同引入不同api地址\r\nimport { config } from \"@/config\";\r\nconst service = axios.create({\r\n  baseURL: config.baseApi + \"/api\", // url = base url + request url\r\n  timeout: 5000,\r\n  withCredentials: false // send cookies when cross-domain requests\r\n  // headers: {\r\n  // \t// clear cors\r\n  // \t'Cache-Control': 'no-cache',\r\n  // \tPragma: 'no-cache'\r\n  // }\r\n})\r\n// Request interceptors\r\nservice.interceptors.request.use(\r\n  (config: AxiosRequestConfig) => {\r\n    // 加载动画\r\n    if (config.loading) {\r\n      Toast.loading({\r\n        message: \"加载中...\",\r\n        forbidClick: true\r\n      });\r\n    }\r\n    // 在此处添加请求头等，如添加 token\r\n    // if (store.state.token) {\r\n    // config.headers['Authorization'] = `Bearer ${store.state.token}`\r\n    // }\r\n    return config;\r\n  },\r\n  (error: any) => {\r\n    Promise.reject(error);\r\n  }\r\n)\r\n// Response interceptors\r\nservice.interceptors.response.use(\r\n  async (response: AxiosResponse) => {\r\n    // await new Promise(resovle => setTimeout(resovle, 3000))\r\n    Toast.clear();\r\n    const res = response.data;\r\n    if (res.code !== 0) {\r\n      // token 过期\r\n      if (res.code === 401)\r\n        // 警告提示窗\r\n        return;\r\n      if (res.code == 403) {\r\n        Dialog.alert({\r\n          title: \"警告\",\r\n          message: res.msg\r\n        }).then(() => {})\r\n        return\r\n      }\r\n      // 若后台返回错误值，此处返回对应错误对象，下面 error 就会接收\r\n      return Promise.reject(new Error(res.msg || \"Error\"))\r\n    }\r\n    // 注意返回值\r\n    else return response.data\r\n  },\r\n  (error: any) => {\r\n    Toast.clear();\r\n    if (error && error.response) {\r\n      switch (error.response.status) {\r\n        case 400:\r\n          error.message = \"请求错误(400)\"\r\n          break\r\n        case 401:\r\n          error.message = \"未授权,请登录(401)\"\r\n          break\r\n        case 403:\r\n          error.message = \"拒绝访问(403)\"\r\n          break\r\n        case 404:\r\n          error.message = `请求地址出错: ${error.response.config.url}`\r\n          break\r\n        case 405:\r\n          error.message = \"请求方法未允许(405)\"\r\n          break\r\n        case 408:\r\n          error.message = \"请求超时(408)\"\r\n          break\r\n        case 500:\r\n          error.message = \"服务器内部错误(500)\"\r\n          break\r\n        case 501:\r\n          error.message = \"服务未实现(501)\"\r\n          break\r\n        case 502:\r\n          error.message = \"网络错误(502)\"\r\n          break\r\n        case 503:\r\n          error.message = \"服务不可用(503)\"\r\n          break\r\n        case 504:\r\n          error.message = \"网络超时(504)\"\r\n          break\r\n        case 505:\r\n          error.message = \"HTTP版本不受支持(505)\"\r\n          break\r\n        default:\r\n          error.message = `连接错误: ${error.message}`\r\n      }\r\n    } else {\r\n      if (error.message == \"Network Error\") error.message == \"网络异常，请检查后重试！\"\r\n      error.message = \"连接到服务器失败，请联系管理员\"\r\n    }\r\n    Toast(error.message)\r\n    // store.auth.clearAuth()\r\n    // store.dispatch(\"clearAuth\")\r\n    return Promise.reject(error)\r\n  }\r\n)\r\nexport default service\r\n\r\n```\r\n## https://juejin.cn/post/6978609399682039839",
+      "data": {
+        "title": "axios+ts",
+        "date": "2021-06-29 15:04:21",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "axiosts"
+    },
+    {
       "content": "1. 整理更合适的接口就是一个很好的意义，如果你的前端比较重，那前端就必须保持干净，别让不合理的接口污染代码\r\n2. 多接口调用合一的情况，BFF 与后端服务的通信速度远快于浏览器走网络\r\n3. SSR\r\n4. 公网是很慢的，像是把数组变成一个 length，能很大节省传输量\r\n---\r\n1.后端服务要求稳定，高性能，作为核心业务，常用语言有 java，bff 作为胶水层，需要灵活，开发速度快，能够快速响应业务变化，常用语言有 node，php 2.bff 作为聚合接口数据层，可以清洗后端服务提供的数据，针对性的提供更合理的数据结构给前端，减小用户流量消耗，加快网络速度 3.减轻前端对数据的繁杂处理，让前端更纯粹的渲染页面\r\n---\r\nhttps://www.v2ex.com/t/784162#reply21",
       "data": {
         "title": "bff",
