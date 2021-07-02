@@ -13,7 +13,7 @@ while(Vue.super) {Vue = Vue.super}
 Vue.config.devtools = true
 window.__VUE_DEVTOOLS_GLOBAL_HOOK__.Vue = Vue
 ```
-## 
+## $vm
 ```
 重新开启console
 ```
@@ -21,7 +21,8 @@ window.__VUE_DEVTOOLS_GLOBAL_HOOK__.Vue = Vue
 ```js
 $0.__vue__.$store._vm._data
 ```
-## react
+## react $r
 ```
-$0.__react
+// $0.__react
+$r.props.store.getState()
 ```
