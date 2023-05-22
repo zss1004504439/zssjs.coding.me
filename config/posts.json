@@ -1,22 +1,6 @@
 {
   "posts": [
     {
-      "content": "## 测试",
-      "data": {
-        "title": "测试",
-        "date": "2023-05-22 21:20:49",
-        "tags": [],
-        "published": true,
-        "hideInList": false,
-        "feature": null,
-        "isTop": false
-      },
-      "isEmpty": false,
-      "excerpt": "",
-      "abstract": "",
-      "fileName": "ce-shi"
-    },
-    {
       "content": "```js\r\nfunction* search(node){ \r\n    if(!node){\r\n         return \r\n         };  \r\n         yield node; \r\n         yield* search(node.firstChild); \r\n         yield* search(node.nextSibling); \r\n}\r\nfor (let node of search(document)){ \r\n    if(node.localName === 'title')\r\n    { console.log(node.textContent());\r\n    break; \r\n    } \r\n}\r\n```",
       "data": {
         "title": "yield",
